@@ -78,9 +78,9 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
   return (
     <div className="relative min-h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#234836] px-10 py-3 fixed top-0 left-0 right-0 bg-[#11221a]/80 backdrop-blur-sm z-10">
-        <div className="flex items-center gap-4 text-white">
-          <div className="size-6">
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#234836] px-4 sm:px-6 lg:px-10 py-3 fixed top-0 left-0 right-0 bg-[#11221a]/80 backdrop-blur-sm z-10">
+        <div className="flex items-center gap-3 sm:gap-4 text-white">
+          <div className="size-5 sm:size-6">
             <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_6_535)">
                 <path clipRule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fillRule="evenodd"></path>
@@ -92,7 +92,7 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
               </defs>
             </svg>
           </div>
-          <h2 className="text-white text-xl font-bold leading-tight tracking-[-0.015em]">DreamLife</h2>
+          <h2 className="text-white text-lg sm:text-xl font-bold leading-tight tracking-[-0.015em]">DreamLife</h2>
         </div>
       </header>
 
@@ -100,10 +100,10 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
       <main className="flex-1 w-full max-w-7xl mx-auto pt-24 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left Column: Character Form */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 sm:gap-8">
             <div>
-              <p className="text-white text-4xl font-black leading-tight tracking-[-0.033em]">A New Life Awaits</p>
-              <p className="text-[#92c9ad] text-lg font-normal leading-normal mt-2">Create your character and begin your journey.</p>
+              <p className="text-white text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-[-0.033em]">A New Life Awaits</p>
+              <p className="text-[#92c9ad] text-base sm:text-lg font-normal leading-normal mt-2">Create your character and begin your journey.</p>
             </div>
 
             {/* Name Inputs */}

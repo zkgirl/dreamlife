@@ -34,32 +34,32 @@ function StatCard({ icon, label, value, color, description, isPercentage = true 
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02, boxShadow: '0 10px 30px rgba(19, 236, 128, 0.2)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="bg-[#34495e] rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 relative overflow-hidden group"
+      className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 relative overflow-hidden group"
     >
       {/* Dreamy gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="relative z-10">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between mb-3 gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
             <motion.span
-              className={`material-symbols-outlined text-2xl ${color}`}
+              className={`material-symbols-outlined text-xl sm:text-2xl ${color} flex-shrink-0`}
               whileHover={{ rotate: 360, scale: 1.2 }}
               transition={{ duration: 0.5 }}
             >
               {icon}
             </motion.span>
-            <h3 className="text-white font-bold text-lg">{label}</h3>
+            <h3 className="text-white font-bold text-base sm:text-lg truncate">{label}</h3>
           </div>
-          <span className="text-white font-bold text-lg">
+          <span className="text-white font-bold text-base sm:text-lg flex-shrink-0">
             {isPercentage && typeof value === 'number' ? `${Math.round(value)}%` : value}
           </span>
         </div>
 
         {/* Progress Bar with Gradient */}
-        <div className="w-full bg-gray-700/50 rounded-full h-3 mb-2 overflow-hidden relative">
+        <div className="w-full bg-gray-700/50 rounded-full h-2 sm:h-3 mb-2 overflow-hidden relative">
           <motion.div
-            className={`h-3 rounded-full ${getGradientClass(color)} shadow-lg`}
+            className={`h-2 sm:h-3 rounded-full ${getGradientClass(color)} shadow-lg`}
             initial={{ width: 0 }}
             animate={{ width: `${Math.min(percentage, 100)}%` }}
             transition={{ duration: 1, ease: 'easeOut' }}
@@ -69,7 +69,7 @@ function StatCard({ icon, label, value, color, description, isPercentage = true 
           </motion.div>
         </div>
 
-        <p className="text-gray-400 text-sm">{description}</p>
+        <p className="text-gray-400 text-xs sm:text-sm">{description}</p>
       </div>
     </motion.div>
   );
@@ -144,7 +144,7 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
     .slice(-4);
 
   return (
-    <div className="p-8 bg-[#1a252f] min-h-screen relative overflow-hidden">
+    <div className="p-4 sm:p-6 lg:p-8 pt-16 lg:pt-8 bg-[#1a252f] min-h-screen relative overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5 animate-pulse-glow" />
 
@@ -154,24 +154,24 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-[#34495e] rounded-xl p-6 border border-white/10 hover:border-primary/30 mb-6 transition-all duration-300 animate-glow"
+            className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10 hover:border-primary/30 mb-6 transition-all duration-300 animate-glow"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <p className="text-[#92c9ad] text-sm mb-1">Current Career</p>
-                <h2 className="text-white text-2xl font-bold">{job.title}</h2>
+                <h2 className="text-white text-xl sm:text-2xl font-bold">{job.title}</h2>
                 <p className="text-white/60 text-sm mt-1">Years Worked: {job.yearsWorked}</p>
               </div>
-              <div className="text-right">
+              <div className="text-left sm:text-right">
                 <p className="text-[#92c9ad] text-sm mb-1">Annual Salary</p>
-                <p className="text-white text-2xl font-bold">${job.salary.toLocaleString()}</p>
+                <p className="text-white text-xl sm:text-2xl font-bold">${job.salary.toLocaleString()}</p>
               </div>
             </div>
           </motion.div>
         )}
 
       {/* Core Stats */}
-      <h1 className="text-white text-4xl font-bold mb-6">Core Stats</h1>
+      <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold mb-6">Core Stats</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         <StatCard
@@ -222,8 +222,8 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
       {/* Last Year's Events */}
       {lastYearEvents.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-white text-3xl font-bold mb-6">Last Year's Events</h2>
-          <div className="bg-[#34495e] rounded-xl p-6 border border-white/10">
+          <h2 className="text-white text-2xl sm:text-3xl font-bold mb-6">Last Year's Events</h2>
+          <div className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10">
             <div className="space-y-4">
               {lastYearEvents.map((event, index) => (
                 <motion.div
@@ -231,12 +231,12 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-3 text-white/90"
+                  className="flex items-start gap-3 text-white/90 text-sm sm:text-base"
                 >
-                  <span className="material-symbols-outlined text-primary mt-0.5">
+                  <span className="material-symbols-outlined text-primary mt-0.5 flex-shrink-0">
                     {event.type === 'milestone' ? 'north' : event.type === 'activity' ? 'sports_esports' : 'book'}
                   </span>
-                  <p>{event.text}</p>
+                  <p className="break-words">{event.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -249,7 +249,7 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
         <motion.button
           onClick={handleAgeUp}
           disabled={isTransitioning || currentEvent !== null}
-          className={`flex items-center gap-2 font-bold py-4 px-8 rounded-full transition-all duration-300 relative overflow-hidden ${
+          className={`flex items-center justify-center gap-2 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all duration-300 relative overflow-hidden w-full sm:w-auto ${
             isTransitioning || currentEvent !== null
               ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
               : 'bg-gradient-to-r from-[#f39c12] to-[#e67e22] text-white hover:shadow-2xl hover:shadow-orange-500/50'
@@ -261,7 +261,7 @@ export default function DashboardStats({ onAgeUp, isTransitioning = false, curre
           {!(isTransitioning || currentEvent !== null) && (
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 animate-pulse-glow" />
           )}
-          <span className="text-xl relative z-10">Age Up</span>
+          <span className="text-lg sm:text-xl relative z-10">Age Up</span>
           <span className="material-symbols-outlined relative z-10">arrow_forward</span>
         </motion.button>
       </div>

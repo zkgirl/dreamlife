@@ -84,18 +84,18 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative flex w-full max-w-2xl flex-col items-stretch justify-start rounded-xl bg-[#2c3e50] shadow-2xl overflow-hidden border border-primary/30 animate-glow"
+          className="relative flex w-full max-w-2xl mx-4 flex-col items-stretch justify-start rounded-xl bg-[#2c3e50] shadow-2xl overflow-hidden border border-primary/30 animate-glow max-h-[90vh]"
         >
           {/* Close Button */}
           <button
             onClick={onDismiss}
-            className="absolute top-4 right-4 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/30 text-white transition-colors hover:bg-black/50 backdrop-blur-sm"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 flex h-10 w-10 sm:h-8 sm:w-8 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70 backdrop-blur-sm"
           >
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
 
           {/* Event Image */}
-          <div className="aspect-h-2 aspect-w-4 w-full h-48">
+          <div className="aspect-h-2 aspect-w-4 w-full h-32 sm:h-48">
             <div
               className="h-full w-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url("${eventImage}")` }}
@@ -104,14 +104,14 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
             </div>
           </div>
 
-          <div className="flex w-full grow flex-col items-stretch justify-center gap-6 p-6 sm:p-8">
+          <div className="flex w-full grow flex-col items-stretch justify-center gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 overflow-y-auto">
             {/* Modal Header & Description */}
             <div className="flex flex-col gap-2">
               {event.category && (
-                <p className="text-sm font-medium text-primary capitalize">{event.category} Event</p>
+                <p className="text-xs sm:text-sm font-medium text-primary capitalize">{event.category} Event</p>
               )}
-              <p className="text-2xl font-bold leading-tight tracking-tighter text-white">Life Event</p>
-              <p className="text-base font-normal leading-relaxed text-white/80">
+              <p className="text-xl sm:text-2xl font-bold leading-tight tracking-tighter text-white">Life Event</p>
+              <p className="text-sm sm:text-base font-normal leading-relaxed text-white/80">
                 {event.text}
               </p>
             </div>
@@ -132,7 +132,7 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
                       }
                     }}
                     disabled={!affordable}
-                    className={`group flex min-w-[84px] cursor-pointer items-center justify-between gap-2 overflow-hidden rounded-full h-12 px-5 text-base font-bold leading-normal tracking-wide transition-all relative z-10 ${
+                    className={`group flex min-w-[84px] cursor-pointer items-center justify-between gap-2 overflow-hidden rounded-full h-12 sm:h-12 px-4 sm:px-5 text-sm sm:text-base font-bold leading-normal tracking-wide transition-all relative z-10 ${
                       !affordable
                         ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
                         : isPrimary
@@ -148,7 +148,7 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
                     )}
                     <span className="truncate relative z-10">{choice.text}</span>
                     {choice.requireMoney && (
-                      <span className={`text-sm relative z-10 ${affordable ? '' : 'line-through'}`}>
+                      <span className={`text-xs sm:text-sm relative z-10 flex-shrink-0 ${affordable ? '' : 'line-through'}`}>
                         ${choice.requireMoney.toLocaleString()}
                       </span>
                     )}

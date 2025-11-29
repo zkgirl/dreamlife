@@ -135,26 +135,26 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-glow"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
             <div>
-              <h1 className="text-white text-2xl font-bold">🛍️ Dream Shop</h1>
-              <p className="text-[#92c9ad] text-sm">Your money: ${stats.money.toLocaleString()}</p>
+              <h1 className="text-white text-xl sm:text-2xl font-bold">🛍️ Dream Shop</h1>
+              <p className="text-[#92c9ad] text-xs sm:text-sm">Your money: ${stats.money.toLocaleString()}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
           </div>
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
             {/* Categories Sidebar */}
-            <div className="w-64 border-r border-white/10 p-4 bg-[#34495e]/50">
-              <h2 className="text-white font-bold mb-4">Categories</h2>
+            <div className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-white/10 p-4 bg-[#34495e]/50 overflow-x-auto lg:overflow-x-visible">
+              <h2 className="text-white font-bold mb-4 text-base sm:text-lg">Categories</h2>
               <div className="space-y-2">
                 {categories.map((category) => (
                   <motion.button
@@ -181,26 +181,26 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
             </div>
 
             {/* Items Grid */}
-            <div className="flex-1 p-6 overflow-y-auto">
-              <h2 className="text-white text-xl font-bold mb-4">
+            <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
+              <h2 className="text-white text-xl sm:text-2xl font-bold mb-4">
                 {categories.find(c => c.id === selectedCategory)?.name}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredItems.map((item) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     whileHover={{ scale: 1.02, y: -5 }}
-                    className="bg-[#34495e] rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 group relative overflow-hidden"
+                    className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 group relative overflow-hidden"
                   >
                     {/* Glow effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <div className="relative z-10">
-                      <div className="text-4xl mb-3">{item.icon}</div>
-                      <h3 className="text-white font-bold text-lg mb-1">{item.name}</h3>
-                      <p className="text-gray-400 text-sm mb-3">{item.description}</p>
+                      <div className="text-3xl sm:text-4xl mb-3">{item.icon}</div>
+                      <h3 className="text-white font-bold text-base sm:text-lg mb-1 truncate">{item.name}</h3>
+                      <p className="text-gray-400 text-sm sm:text-base mb-3">{item.description}</p>
 
                       {/* Age Restriction */}
                       {item.minAge && (
@@ -224,8 +224,8 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
                       )}
 
                       {/* Price and Buy Button */}
-                      <div className="flex items-center justify-between">
-                        <span className="text-yellow-400 font-bold text-lg">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-yellow-400 font-bold text-base sm:text-lg flex-shrink-0">
                           ${item.price.toLocaleString()}
                         </span>
                         <motion.button
@@ -233,7 +233,7 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           disabled={Boolean(stats.money < item.price || (item.minAge && stats.age < item.minAge))}
-                          className={`px-4 py-2 rounded-full font-bold transition-all ${
+                          className={`px-3 sm:px-4 py-2 sm:py-3 rounded-full font-bold text-sm sm:text-base transition-all ${
                             stats.money >= item.price && (!item.minAge || stats.age >= item.minAge)
                               ? 'bg-gradient-to-r from-primary to-emerald-400 text-white hover:shadow-lg hover:shadow-primary/50'
                               : 'bg-gray-600 text-gray-400 cursor-not-allowed'

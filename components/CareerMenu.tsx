@@ -113,13 +113,13 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-glow"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
             <div>
-              <h1 className="text-white text-2xl font-bold">💼 Career Opportunities</h1>
-              <div className="flex gap-4 mt-1 text-sm">
+              <h1 className="text-white text-xl sm:text-2xl font-bold">💼 Career Opportunities</h1>
+              <div className="flex flex-wrap gap-2 sm:gap-4 mt-1 text-xs sm:text-sm">
                 <span className="text-[#92c9ad]">
                   🎓 Education: {education.level === 'none' ? 'None' : education.level}
                 </span>
@@ -137,16 +137,16 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
             </div>
             <button
               onClick={handleClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
           </div>
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
             {/* Categories Sidebar */}
-            <div className="w-64 border-r border-white/10 p-4 bg-[#34495e]/50 overflow-y-auto">
-              <h2 className="text-white font-bold mb-4">Categories</h2>
+            <div className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-white/10 p-4 bg-[#34495e]/50 overflow-x-auto lg:overflow-y-auto">
+              <h2 className="text-white font-bold mb-4 text-base sm:text-lg">Categories</h2>
               <div className="space-y-2">
                 {categories.map((category) => {
                   const count = category === 'all'
@@ -186,20 +186,20 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
             </div>
 
             {/* Jobs Grid */}
-            <div className="flex-1 p-6 overflow-y-auto">
+            <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
               {job && (
-                <div className="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-                  <p className="text-yellow-400 text-center font-semibold">
+                <div className="mb-6 p-3 sm:p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                  <p className="text-yellow-400 text-center font-semibold text-sm sm:text-base">
                     ⚠️ You already have a job as {job.title}. Quit your current job before applying for a new one.
                   </p>
                 </div>
               )}
 
-              <h2 className="text-white text-xl font-bold mb-4">
+              <h2 className="text-white text-xl sm:text-2xl font-bold mb-4 capitalize">
                 {selectedCategory === 'all' ? 'All Careers' : `${selectedCategory} Careers`}
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredCareers.map((career, index) => {
                   const eligible = canApply(career);
                   const requirement = getMissingRequirement(career);
@@ -211,23 +211,23 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
                       whileHover={eligible ? { scale: 1.02, y: -5 } : {}}
-                      className={`bg-[#34495e] rounded-xl p-5 border transition-all ${
+                      className={`bg-[#34495e] rounded-xl p-4 sm:p-5 border transition-all ${
                         eligible
                           ? 'border-white/10 hover:border-primary/30'
                           : 'border-red-500/20 opacity-70'
                       }`}
                     >
                       {/* Header */}
-                      <div className="flex items-start gap-3 mb-3">
-                        <span className="text-3xl">{career.icon}</span>
-                        <div className="flex-1">
-                          <h3 className="text-white font-bold text-lg">{career.title}</h3>
-                          <p className="text-[#92c9ad] text-sm">{career.category}</p>
+                      <div className="flex items-start gap-2 sm:gap-3 mb-3">
+                        <span className="text-2xl sm:text-3xl flex-shrink-0">{career.icon}</span>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-white font-bold text-base sm:text-lg truncate">{career.title}</h3>
+                          <p className="text-[#92c9ad] text-xs sm:text-sm capitalize">{career.category}</p>
                         </div>
                       </div>
 
                       {/* Salary Range */}
-                      <div className="mb-4 p-3 bg-white/5 rounded-lg">
+                      <div className="mb-4 p-2 sm:p-3 bg-white/5 rounded-lg">
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-white/60">Starting:</span>
                           <span className="text-green-400 font-bold">${career.baseSalary.toLocaleString()}</span>
@@ -273,7 +273,7 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
                         disabled={!eligible || !!job}
                         whileHover={eligible && !job ? { scale: 1.05 } : {}}
                         whileTap={eligible && !job ? { scale: 0.95 } : {}}
-                        className={`w-full py-2 rounded-full font-bold transition-all ${
+                        className={`w-full py-2 sm:py-3 rounded-full font-bold text-sm sm:text-base transition-all ${
                           eligible && !job
                             ? 'bg-gradient-to-r from-primary to-emerald-400 text-white hover:shadow-lg'
                             : 'bg-gray-700 text-gray-500 cursor-not-allowed'
