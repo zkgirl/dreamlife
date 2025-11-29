@@ -1,0 +1,109 @@
+[
+  {
+    "id": "cashier",
+    "title": "Part-time Cashier",
+    "salary": 500,
+    "requiredEducation": "none",
+    "requiredSmarts": 20
+  },
+  {
+    "id": "waiter",
+    "title": "Waiter/Waitress",
+    "salary": 800,
+    "requiredEducation": "high",
+    "requiredSmarts": 25
+  },
+  {
+    "id": "teacher",
+    "title": "Elementary School Teacher",
+    "salary": 45000,
+    "requiredEducation": "university",
+    "requiredSmarts": 70
+  },
+  {
+    "id": "software_developer",
+    "title": "Software Developer",
+    "salary": 75000,
+    "requiredEducation": "university",
+    "requiredSmarts": 80
+  },
+  {
+    "id": "doctor",
+    "title": "Doctor",
+    "salary": 150000,
+    "requiredEducation": "graduate",
+    "requiredSmarts": 90
+  },
+  {
+    "id": "lawyer",
+    "title": "Lawyer",
+    "salary": 120000,
+    "requiredEducation": "graduate",
+    "requiredSmarts": 85
+  },
+  {
+    "id": "nurse",
+    "title": "Registered Nurse",
+    "salary": 65000,
+    "requiredEducation": "university",
+    "requiredSmarts": 70
+  },
+  {
+    "id": "accountant",
+    "title": "Accountant",
+    "salary": 60000,
+    "requiredEducation": "university",
+    "requiredSmarts": 75
+  },
+  {
+    "id": "marketing_manager",
+    "title": "Marketing Manager",
+    "salary": 70000,
+    "requiredEducation": "university",
+    "requiredSmarts": 65
+  },
+  {
+    "id": "police_officer",
+    "title": "Police Officer",
+    "salary": 55000,
+    "requiredEducation": "high",
+    "requiredSmarts": 60
+  },
+  {
+    "id": "firefighter",
+    "title": "Firefighter",
+    "salary": 50000,
+    "requiredEducation": "high",
+    "requiredSmarts": 55
+  },
+  {
+    "id": "engineer",
+    "title": "Engineer",
+    "salary": 85000,
+    "requiredEducation": "university",
+    "requiredSmarts": 80
+  },
+  {
+    "id": "ceo",
+    "title": "CEO",
+    "salary": 250000,
+    "requiredEducation": "university",
+    "requiredSmarts": 95
+  },
+  {
+    "id": "actor",
+    "title": "Actor",
+    "salary": 40000,
+    "requiredEducation": "high",
+    "requiredSmarts": 50,
+    "requiredLooks": 70
+  },
+  {
+    "id": "athlete",
+    "title": "Professional Athlete",
+    "salary": 100000,
+    "requiredEducation": "high",
+    "requiredSmarts": 40,
+    "requiredHealth": 90
+  }
+]

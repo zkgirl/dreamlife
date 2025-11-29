@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout /t 2 /nobreak)",
+      "Bash(ren BitLifeStats.tsx DreamLifeStats.tsx)",
+      "Bash(ren:*)",
+      "Bash(timeout /t 5 /nobreak)",
+      "Bash(truncate:*)",
+      "Bash(git add:*)",
+      "Bash(del nul)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(taskkill:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,948 @@
+[
+  {
+    "id": "birth_reaction",
+    "text": "You were just born! Your family welcomes you into the world.",
+    "ageRange": [0, 0],
+    "choices": [
+      { "text": "Smile at parents", "effects": { "happiness": 10 } },
+      { "text": "Cry loudly", "effects": { "happiness": -5 } },
+      { "text": "Sleep peacefully", "effects": { "health": 5, "happiness": 5 } },
+      { "text": "Wiggle around", "effects": { "looks": 3, "happiness": 5 } }
+    ]
+  },
+  {
+    "id": "sibling_teases",
+    "text": "Your sibling is teasing you playfully.",
+    "ageRange": [1, 5],
+    "choices": [
+      { "text": "Cry", "effects": { "happiness": -10 } },
+      { "text": "Hit them", "effects": { "happiness": -5, "health": -5 } },
+      { "text": "Laugh it off", "effects": { "happiness": 10 } },
+      { "text": "Tell mom", "effects": { "happiness": 5, "smarts": 3 } }
+    ]
+  },
+  {
+    "id": "first_word",
+    "text": "It's time for your first word! What do you say?",
+    "ageRange": [1, 2],
+    "choices": [
+      { "text": "\"Mama\"", "effects": { "happiness": 15, "smarts": 5 } },
+      { "text": "\"Dada\"", "effects": { "happiness": 15, "smarts": 5 } },
+      { "text": "\"No\"", "effects": { "happiness": 5, "smarts": 3 } },
+      { "text": "\"Dog\"", "effects": { "happiness": 10, "smarts": 5 } }
+    ]
+  },
+  {
+    "id": "learning_walk",
+    "text": "Your parents are encouraging you to take your first steps!",
+    "ageRange": [1, 2],
+    "choices": [
+      { "text": "Try to walk", "effects": { "health": 10, "happiness": 15, "smarts": 5 } },
+      { "text": "Refuse and cry", "effects": { "happiness": -10 } },
+      { "text": "Keep crawling", "effects": { "health": 3 } },
+      { "text": "Fall down", "effects": { "health": -5, "happiness": -3 } }
+    ]
+  },
+  {
+    "id": "pet_introduced",
+    "text": "Your family brought home a new pet!",
+    "ageRange": [2, 5],
+    "choices": [
+      { "text": "Pet it gently", "effects": { "happiness": 15, "smarts": 5 } },
+      { "text": "Run away scared", "effects": { "happiness": -5 } },
+      { "text": "Scream", "effects": { "happiness": -10, "health": -3 } },
+      { "text": "Ignore it", "effects": {} }
+    ]
+  },
+  {
+    "id": "parent_reads",
+    "text": "Your parent is reading you a bedtime story.",
+    "ageRange": [2, 5],
+    "choices": [
+      { "text": "Listen carefully", "effects": { "smarts": 10, "happiness": 10 } },
+      { "text": "Fall asleep", "effects": { "health": 8, "happiness": 5 } },
+      { "text": "Grab the book", "effects": { "smarts": 5, "happiness": 3 } },
+      { "text": "Giggle", "effects": { "happiness": 10 } }
+    ]
+  },
+  {
+    "id": "preschool_name",
+    "text": "The preschool teacher asks you to say your name.",
+    "ageRange": [3, 5],
+    "choices": [
+      { "text": "Say it proudly", "effects": { "happiness": 10, "smarts": 5, "looks": 5 } },
+      { "text": "Be shy", "effects": { "happiness": -3 } },
+      { "text": "Say you forgot", "effects": { "smarts": -3, "happiness": -5 } },
+      { "text": "Yell it loudly", "effects": { "happiness": 5, "looks": -3 } }
+    ]
+  },
+  {
+    "id": "playground_slide",
+    "text": "You're at the playground. What do you want to do?",
+    "ageRange": [3, 7],
+    "choices": [
+      { "text": "Climb the slide", "effects": { "health": 10, "happiness": 15 } },
+      { "text": "Play in sandbox", "effects": { "happiness": 10, "smarts": 5 } },
+      { "text": "Wait for parent", "effects": { "happiness": -5 } },
+      { "text": "Go home", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "birthday_party",
+    "text": "It's your birthday party! Time to blow out the candles.",
+    "ageRange": [3, 10],
+    "choices": [
+      { "text": "Blow candles", "effects": { "happiness": 20 } },
+      { "text": "Hide from attention", "effects": { "happiness": -5 } },
+      { "text": "Eat cake first", "effects": { "happiness": 15, "health": -3 } },
+      { "text": "Dance", "effects": { "happiness": 20, "health": 5 } }
+    ]
+  },
+  {
+    "id": "vaccination",
+    "text": "Time for your vaccination shot at the doctor's office.",
+    "ageRange": [4, 6],
+    "choices": [
+      { "text": "Stay calm", "effects": { "health": 15, "happiness": 5, "smarts": 5 } },
+      { "text": "Cry loudly", "effects": { "health": 15, "happiness": -10 } },
+      { "text": "Bite the nurse", "effects": { "health": 10, "happiness": -15, "smarts": -5 } },
+      { "text": "Make a joke", "effects": { "health": 15, "happiness": 10, "smarts": 5 } }
+    ]
+  },
+  {
+    "id": "lose_toy",
+    "text": "You lost your favorite toy!",
+    "ageRange": [3, 8],
+    "choices": [
+      { "text": "Search for it", "effects": { "happiness": 5, "smarts": 5 } },
+      { "text": "Cry", "effects": { "happiness": -15 } },
+      { "text": "Blame sibling", "effects": { "happiness": -5, "smarts": -3 } },
+      { "text": "Ask for help", "effects": { "happiness": 10, "smarts": 8 } }
+    ]
+  },
+  {
+    "id": "meet_grandparents",
+    "text": "You're meeting your grandparents for the first time today!",
+    "ageRange": [1, 5],
+    "choices": [
+      { "text": "Hug them", "effects": { "happiness": 20 } },
+      { "text": "Ask for money", "effects": { "money": 50, "smarts": 3, "happiness": 10 } },
+      { "text": "Ignore them", "effects": { "happiness": -5 } },
+      { "text": "Play with them", "effects": { "happiness": 15, "health": 5 } }
+    ]
+  },
+  {
+    "id": "first_pet_dies",
+    "text": "Your first pet has passed away. You're devastated.",
+    "ageRange": [6, 12],
+    "choices": [
+      { "text": "Cry and mourn", "effects": { "happiness": -20, "health": -5 } },
+      { "text": "Blame yourself", "effects": { "happiness": -25, "health": -8 } },
+      { "text": "Hold a memorial", "effects": { "happiness": -5, "smarts": 5 } },
+      { "text": "Adopt a new pet", "effects": { "happiness": 10, "money": -200 } }
+    ]
+  },
+  {
+    "id": "school_bully_detailed",
+    "text": "A bully is picking on you at school every day.",
+    "ageRange": [7, 14],
+    "choices": [
+      { "text": "Fight back", "effects": { "happiness": -10, "health": -15, "looks": -5 } },
+      { "text": "Tell teacher", "effects": { "happiness": 10, "smarts": 8, "health": 5 } },
+      { "text": "Ignore them", "effects": { "happiness": -20, "health": -5 } },
+      { "text": "Befriend them", "effects": { "happiness": 15, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "field_trip",
+    "text": "Your class is going on a field trip to the museum!",
+    "ageRange": [7, 15],
+    "choices": [
+      { "text": "Participate actively", "effects": { "smarts": 15, "happiness": 20 } },
+      { "text": "Skip it", "effects": { "smarts": -5, "happiness": -10 } },
+      { "text": "Prank classmates", "effects": { "happiness": 10, "smarts": -5, "looks": -5 } },
+      { "text": "Miss the bus", "effects": { "happiness": -15, "smarts": -5 } }
+    ]
+  },
+  {
+    "id": "best_friend_moves",
+    "text": "Your best friend is moving to another city!",
+    "ageRange": [8, 16],
+    "choices": [
+      { "text": "Cry together", "effects": { "happiness": -20 } },
+      { "text": "Promise to email", "effects": { "happiness": -5, "smarts": 5 } },
+      { "text": "Make a new friend", "effects": { "happiness": 10, "smarts": 5 } },
+      { "text": "Plan to visit", "effects": { "happiness": 5, "money": -100 } }
+    ]
+  },
+  {
+    "id": "learn_swim",
+    "text": "Swimming lessons! Your parents signed you up.",
+    "ageRange": [6, 14],
+    "choices": [
+      { "text": "Try your best", "effects": { "health": 20, "happiness": 20, "looks": 5 } },
+      { "text": "Refuse to swim", "effects": { "happiness": -15, "money": -100 } },
+      { "text": "Panic in water", "effects": { "health": -10, "happiness": -20 } },
+      { "text": "Master swimming", "effects": { "health": 25, "happiness": 25, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "join_club",
+    "text": "Do you want to join the school sports or arts club?",
+    "ageRange": [8, 17],
+    "choices": [
+      { "text": "Join sports", "effects": { "health": 15, "happiness": 15, "looks": 10 } },
+      { "text": "Join arts", "effects": { "smarts": 20, "happiness": 15, "looks": 5 } },
+      { "text": "Ask parent first", "effects": { "smarts": 5, "happiness": -3 } },
+      { "text": "Decline both", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "tooth_falls_out",
+    "text": "Your tooth just fell out! The tooth fairy might visit!",
+    "ageRange": [6, 9],
+    "choices": [
+      { "text": "Show everyone", "effects": { "happiness": 15, "looks": -3 } },
+      { "text": "Hide it", "effects": { "happiness": -5, "money": -10 } },
+      { "text": "Put under pillow", "effects": { "happiness": 20, "money": 10, "smarts": 5 } },
+      { "text": "Sell to friend", "effects": { "money": 5, "smarts": 10, "happiness": 10 } }
+    ]
+  },
+  {
+    "id": "get_glasses",
+    "text": "The eye doctor says you need glasses.",
+    "ageRange": [7, 15],
+    "choices": [
+      { "text": "Accept it", "effects": { "health": 10, "smarts": 10, "happiness": 5 } },
+      { "text": "Refuse to wear them", "effects": { "health": -10, "smarts": -15, "happiness": -5 } },
+      { "text": "Pick cool frames", "effects": { "health": 10, "looks": 10, "happiness": 15 } },
+      { "text": "Break them \"accidentally\"", "effects": { "money": -200, "health": -10, "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "family_moves",
+    "text": "Your family is moving to a new city!",
+    "ageRange": [6, 17],
+    "choices": [
+      { "text": "Get excited", "effects": { "happiness": 15, "smarts": 10 } },
+      { "text": "Feel sad", "effects": { "happiness": -20 } },
+      { "text": "Explore new area", "effects": { "happiness": 20, "smarts": 15, "health": 5 } },
+      { "text": "Rebel against it", "effects": { "happiness": -25, "smarts": -5 } }
+    ]
+  },
+  {
+    "id": "steal_candy",
+    "text": "You see candy in the store. You could easily take it...",
+    "ageRange": [6, 13],
+    "choices": [
+      { "text": "Steal and eat it", "effects": { "happiness": 10, "smarts": -10, "looks": -3 }, "crimeAdd": "Petty theft" },
+      { "text": "Steal and share", "effects": { "happiness": 15, "smarts": -5 }, "crimeAdd": "Petty theft" },
+      { "text": "Confess to parent", "effects": { "happiness": 5, "smarts": 15, "money": -5 } },
+      { "text": "Don't steal", "effects": { "happiness": 5, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "first_crush_detailed",
+    "text": "You have a huge crush on someone at school!",
+    "ageRange": [10, 16],
+    "choices": [
+      { "text": "Confess your feelings", "effects": { "happiness": 20, "looks": 5 }, "relationshipAdd": { "type": "friend", "name": "School Crush" } },
+      { "text": "Ignore the feeling", "effects": { "happiness": -10 } },
+      { "text": "Prank them", "effects": { "happiness": 5, "smarts": -5, "looks": -10 } },
+      { "text": "Write a letter", "effects": { "happiness": 15, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "science_fair",
+    "text": "You're entering the school science fair!",
+    "ageRange": [10, 17],
+    "choices": [
+      { "text": "Work very hard", "effects": { "smarts": 25, "happiness": 10, "health": -5 } },
+      { "text": "Slack off", "effects": { "smarts": -10, "happiness": 10 } },
+      { "text": "Sabotage rival", "effects": { "smarts": -15, "happiness": -10 }, "crimeAdd": "Vandalism" },
+      { "text": "Win the award", "effects": { "smarts": 30, "happiness": 30, "looks": 10, "money": 100 } }
+    ]
+  },
+  {
+    "id": "parents_divorce",
+    "text": "Your parents are getting divorced. Who will you live with?",
+    "ageRange": [8, 17],
+    "choices": [
+      { "text": "Live with mom", "effects": { "happiness": -15 } },
+      { "text": "Live with dad", "effects": { "happiness": -15 } },
+      { "text": "Ignore the situation", "effects": { "happiness": -30, "health": -10, "smarts": -10 } },
+      { "text": "Act out", "effects": { "happiness": -35, "health": -15, "smarts": -15 } }
+    ]
+  },
+  {
+    "id": "sibling_fight",
+    "text": "You got into a big fight with your sibling!",
+    "ageRange": [6, 25],
+    "choices": [
+      { "text": "Apologize", "effects": { "happiness": 15, "smarts": 10 } },
+      { "text": "Get revenge", "effects": { "happiness": -15, "smarts": -10, "health": -5 } },
+      { "text": "Ignore them", "effects": { "happiness": -10 } },
+      { "text": "Blame them", "effects": { "happiness": -20, "smarts": -5 } }
+    ]
+  },
+  {
+    "id": "summer_camp",
+    "text": "Your parents are sending you to summer camp!",
+    "ageRange": [8, 16],
+    "choices": [
+      { "text": "Excel at activities", "effects": { "health": 20, "smarts": 15, "happiness": 25 } },
+      { "text": "Miss home", "effects": { "happiness": -15, "health": -5 } },
+      { "text": "Make an enemy", "effects": { "happiness": -10, "looks": -5 } },
+      { "text": "Make best friend", "effects": { "happiness": 30, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "learn_instrument",
+    "text": "Do you want to learn to play a musical instrument?",
+    "ageRange": [7, 18],
+    "choices": [
+      { "text": "Practice daily", "effects": { "smarts": 20, "happiness": 15, "looks": 5 } },
+      { "text": "Refuse lessons", "effects": { "happiness": -5, "money": 100 } },
+      { "text": "Break instrument", "effects": { "money": -500, "happiness": -15 } },
+      { "text": "Impress everyone", "effects": { "smarts": 30, "happiness": 30, "looks": 15, "money": 200 } }
+    ]
+  },
+  {
+    "id": "big_test",
+    "text": "There's a huge test tomorrow that will affect your grades!",
+    "ageRange": [10, 22],
+    "choices": [
+      { "text": "Study all night", "effects": { "smarts": 20, "health": -10, "happiness": -5 } },
+      { "text": "Cheat", "effects": { "smarts": -15, "happiness": -10 }, "crimeAdd": "Academic dishonesty" },
+      { "text": "Just guess", "effects": { "smarts": -20, "happiness": 5 } },
+      { "text": "Stay calm and try", "effects": { "smarts": 15, "health": 5, "happiness": 10 } }
+    ]
+  },
+  {
+    "id": "puberty_changes",
+    "text": "Your body is changing. You have questions about puberty.",
+    "ageRange": [11, 15],
+    "choices": [
+      { "text": "Ask parent", "effects": { "happiness": 10, "smarts": 15, "health": 5 } },
+      { "text": "Ignore it", "effects": { "health": -10, "smarts": -10, "happiness": -5 } },
+      { "text": "Joke about it", "effects": { "happiness": 10, "looks": 5 } },
+      { "text": "Search online", "effects": { "smarts": 12, "happiness": 5 } }
+    ]
+  },
+  {
+    "id": "first_phone",
+    "text": "You got your first smartphone!",
+    "ageRange": [11, 16],
+    "choices": [
+      { "text": "Be responsible", "effects": { "happiness": 20, "smarts": 10 } },
+      { "text": "Prank call people", "effects": { "happiness": 15, "smarts": -10, "looks": -5 } },
+      { "text": "Lose it immediately", "effects": { "happiness": -25, "money": -500, "smarts": -10 } },
+      { "text": "Hide it from parents", "effects": { "happiness": 10, "smarts": -5 } }
+    ]
+  },
+  {
+    "id": "school_dance",
+    "text": "The school dance is coming up! Will you go?",
+    "ageRange": [13, 17],
+    "choices": [
+      { "text": "Attend with date", "effects": { "happiness": 30, "looks": 10, "money": -50 } },
+      { "text": "Skip it", "effects": { "happiness": -15 } },
+      { "text": "Sabotage the DJ", "effects": { "happiness": -20, "smarts": -10, "looks": -15 }, "crimeAdd": "Vandalism" },
+      { "text": "Dance impressively", "effects": { "happiness": 35, "looks": 20, "health": 10 } }
+    ]
+  },
+  {
+    "id": "peer_pressure_drink",
+    "text": "Friends are pressuring you to try alcohol at a party.",
+    "ageRange": [14, 19],
+    "choices": [
+      { "text": "Try it", "effects": { "health": -15, "happiness": 10, "smarts": -10, "looks": -5 } },
+      { "text": "Refuse firmly", "effects": { "health": 10, "happiness": 15, "smarts": 15 } },
+      { "text": "Make a joke", "effects": { "happiness": 10, "looks": 5 } },
+      { "text": "Tell parent", "effects": { "health": 15, "happiness": 5, "smarts": 10, "looks": -5 } }
+    ]
+  },
+  {
+    "id": "first_relationship",
+    "text": "You're in your first serious relationship!",
+    "ageRange": [15, 22],
+    "choices": [
+      { "text": "Be loving partner", "effects": { "happiness": 30, "looks": 10 }, "relationshipAdd": { "type": "friend", "name": "First Love" } },
+      { "text": "Date casually", "effects": { "happiness": 20, "looks": 5 } },
+      { "text": "Break up quickly", "effects": { "happiness": -20, "looks": -5 } },
+      { "text": "Cheat on them", "effects": { "happiness": -30, "looks": -15, "smarts": -10 } }
+    ]
+  },
+  {
+    "id": "drug_offer",
+    "text": "Someone offers you drugs at a party. What do you do?",
+    "ageRange": [14, 25],
+    "choices": [
+      { "text": "Try it once", "effects": { "health": -25, "happiness": -10, "smarts": -20, "money": -100 } },
+      { "text": "Refuse strongly", "effects": { "health": 15, "happiness": 20, "smarts": 20 } },
+      { "text": "Joke about it", "effects": { "happiness": 10, "looks": 5 } },
+      { "text": "Report to police", "effects": { "health": 10, "happiness": 5, "smarts": 10, "looks": -10 } }
+    ]
+  },
+  {
+    "id": "school_detention",
+    "text": "You got detention for disrupting class!",
+    "ageRange": [12, 18],
+    "choices": [
+      { "text": "Apologize sincerely", "effects": { "happiness": 5, "smarts": 10 } },
+      { "text": "Deny everything", "effects": { "happiness": -15, "smarts": -15 } },
+      { "text": "Prank the teacher", "effects": { "happiness": -25, "smarts": -20 }, "crimeAdd": "Insubordination" },
+      { "text": "Argue your case", "effects": { "happiness": -10, "smarts": 5 } }
+    ]
+  },
+  {
+    "id": "first_breakup",
+    "text": "Your first relationship just ended. You're heartbroken.",
+    "ageRange": [15, 25],
+    "choices": [
+      { "text": "Cry and grieve", "effects": { "happiness": -30, "health": -10 } },
+      { "text": "Move on quickly", "effects": { "happiness": 15, "smarts": 10, "looks": 5 } },
+      { "text": "Insult your ex", "effects": { "happiness": -25, "looks": -15, "smarts": -10 } },
+      { "text": "Stay friends", "effects": { "happiness": 10, "smarts": 15 } }
+    ]
+  },
+  {
+    "id": "learn_drive",
+    "text": "It's time to get your driver's license!",
+    "ageRange": [16, 19],
+    "choices": [
+      { "text": "Pass the test", "effects": { "happiness": 30, "smarts": 15, "looks": 10 } },
+      { "text": "Crash during test", "effects": { "happiness": -30, "health": -20, "money": -1000, "looks": -10 } },
+      { "text": "Cheat on test", "effects": { "happiness": -10, "smarts": -15 }, "crimeAdd": "Fraud" },
+      { "text": "Fail and retry", "effects": { "happiness": -15, "smarts": 5, "money": -50 } }
+    ]
+  },
+  {
+    "id": "part_time_job_detailed",
+    "text": "You're working your first part-time job at a local store.",
+    "ageRange": [15, 22],
+    "choices": [
+      { "text": "Work very hard", "effects": { "money": 800, "happiness": 10, "smarts": 10, "health": -5 } },
+      { "text": "Slack off", "effects": { "money": 200, "happiness": 5, "smarts": -10 } },
+      { "text": "Prank customers", "effects": { "money": -500, "happiness": -20, "smarts": -15 } },
+      { "text": "Ask for raise", "effects": { "money": 1200, "happiness": 20, "smarts": 15 } }
+    ]
+  },
+  {
+    "id": "career_fair",
+    "text": "Your school is hosting a career fair. Will you attend?",
+    "ageRange": [15, 18],
+    "choices": [
+      { "text": "Explore all booths", "effects": { "smarts": 25, "happiness": 15 } },
+      { "text": "Ignore it", "effects": { "smarts": -10, "happiness": -5 } },
+      { "text": "Research careers", "effects": { "smarts": 30, "happiness": 20 } },
+      { "text": "Network actively", "effects": { "smarts": 20, "happiness": 15, "looks": 10 } }
+    ]
+  },
+  {
+    "id": "save_money_teen",
+    "text": "You have $500 saved up. What will you do with it?",
+    "ageRange": [14, 20],
+    "choices": [
+      { "text": "Buy new gadget", "effects": { "money": -500, "happiness": 20 } },
+      { "text": "Invest it", "effects": { "money": 200, "happiness": 10, "smarts": 20 } },
+      { "text": "Gift to family", "effects": { "money": -500, "happiness": 30 } },
+      { "text": "Save for college", "effects": { "money": 100, "happiness": 5, "smarts": 15 } }
+    ]
+  },
+  {
+    "id": "tattoo_piercing",
+    "text": "You're thinking about getting a tattoo or piercing.",
+    "ageRange": [16, 25],
+    "choices": [
+      { "text": "Hide it from parents", "effects": { "looks": 10, "happiness": 15, "money": -200 } },
+      { "text": "Show it off proudly", "effects": { "looks": 15, "happiness": 25, "money": -200 } },
+      { "text": "Regret it immediately", "effects": { "happiness": -20, "looks": -10, "money": -200 } },
+      { "text": "Don't get it", "effects": { "happiness": -5, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "sneak_out",
+    "text": "Your friends want you to sneak out to a party tonight.",
+    "ageRange": [14, 18],
+    "choices": [
+      { "text": "Go to party", "effects": { "happiness": 25, "health": -10, "smarts": -5 } },
+      { "text": "Get caught sneaking", "effects": { "happiness": -30, "looks": -15 } },
+      { "text": "Escalate the fun", "effects": { "happiness": 15, "health": -20, "smarts": -15, "money": -100 } },
+      { "text": "Stay home", "effects": { "happiness": -10, "health": 10, "smarts": 10 } }
+    ]
+  },
+  {
+    "id": "volunteer_work",
+    "text": "A local charity needs volunteers for community service.",
+    "ageRange": [14, 30],
+    "choices": [
+      { "text": "Help enthusiastically", "effects": { "happiness": 30, "smarts": 15, "looks": 10 } },
+      { "text": "Slack off", "effects": { "happiness": -10, "smarts": -5 } },
+      { "text": "Make new friend", "effects": { "happiness": 35, "smarts": 15, "looks": 10 } },
+      { "text": "Make an enemy", "effects": { "happiness": -20, "looks": -10 } }
+    ]
+  },
+  {
+    "id": "high_school_graduation",
+    "text": "You're graduating from high school! Time to celebrate!",
+    "ageRange": [18, 18],
+    "choices": [
+      { "text": "Celebrate with family", "effects": { "happiness": 35, "smarts": 20 } },
+      { "text": "Skip ceremony", "effects": { "happiness": -20, "smarts": -10 } },
+      { "text": "Party all night", "effects": { "happiness": 40, "health": -15, "money": -200 } },
+      { "text": "Volunteer speech", "effects": { "happiness": 45, "smarts": 30, "looks": 20 } }
+    ]
+  },
+  {
+    "id": "university_admission",
+    "text": "You've been accepted to university! What will you study?",
+    "ageRange": [18, 19],
+    "choices": [
+      { "text": "STEM major", "effects": { "smarts": 30, "happiness": 15, "money": -10000 }, "educationUpdate": { "level": "university", "major": "Computer Science" } },
+      { "text": "Arts major", "effects": { "smarts": 25, "happiness": 25, "looks": 15, "money": -8000 }, "educationUpdate": { "level": "university", "major": "Arts" } },
+      { "text": "Business major", "effects": { "smarts": 25, "happiness": 20, "money": -9000 }, "educationUpdate": { "level": "university", "major": "Business" } },
+      { "text": "Don't attend", "effects": { "money": 5000, "happiness": 10, "smarts": -20 } }
+    ]
+  },
+  {
+    "id": "first_apartment",
+    "text": "Time to get your first apartment! How will you live?",
+    "ageRange": [18, 25],
+    "choices": [
+      { "text": "Buy small place", "effects": { "money": -150000, "happiness": 30 }, "assetAdd": { "type": "house", "name": "Studio Apartment", "value": 150000 } },
+      { "text": "Rent cheaply", "effects": { "money": -800, "happiness": 10 } },
+      { "text": "Share with roommate", "effects": { "money": -400, "happiness": 15, "smarts": 10 } },
+      { "text": "Stay with parents", "effects": { "money": 500, "happiness": -10, "looks": -5 } }
+    ]
+  },
+  {
+    "id": "study_abroad",
+    "text": "Your university offers a study abroad program!",
+    "ageRange": [19, 22],
+    "choices": [
+      { "text": "Go abroad", "effects": { "smarts": 35, "happiness": 40, "looks": 15, "money": -5000 } },
+      { "text": "Refuse opportunity", "effects": { "happiness": -15, "smarts": -10 } },
+      { "text": "Lose contact with friends", "effects": { "smarts": 25, "happiness": -20, "looks": 10 } },
+      { "text": "Experience new culture", "effects": { "smarts": 40, "happiness": 50, "looks": 20, "health": 10 } }
+    ]
+  },
+  {
+    "id": "internship_offer",
+    "text": "A prestigious company offered you a summer internship!",
+    "ageRange": [19, 24],
+    "choices": [
+      { "text": "Impress everyone", "effects": { "smarts": 30, "happiness": 25, "money": 3000 }, "jobOffer": { "title": "Intern", "salary": 3000 } },
+      { "text": "Slack off", "effects": { "money": 1000, "happiness": 10, "smarts": -15 } },
+      { "text": "Network hard", "effects": { "smarts": 35, "happiness": 30, "looks": 15, "money": 3500 } },
+      { "text": "Quit early", "effects": { "happiness": -25, "smarts": -20, "money": 500 } }
+    ]
+  },
+  {
+    "id": "career_choice_early",
+    "text": "What career path interests you most?",
+    "ageRange": [20, 25],
+    "choices": [
+      { "text": "Corporate job", "effects": { "money": 5000, "happiness": 10, "smarts": 15 } },
+      { "text": "Start startup", "effects": { "money": -10000, "happiness": 30, "smarts": 25 } },
+      { "text": "Freelance work", "effects": { "money": 2000, "happiness": 25, "smarts": 20 } },
+      { "text": "Government job", "effects": { "money": 4000, "happiness": 20, "smarts": 20, "health": 10 } }
+    ]
+  },
+  {
+    "id": "start_business_detailed",
+    "text": "You have a business idea! Will you pursue it?",
+    "ageRange": [22, 40],
+    "choices": [
+      { "text": "Plan carefully", "effects": { "smarts": 30, "happiness": 20, "money": -5000 } },
+      { "text": "Invest everything", "effects": { "money": -50000, "happiness": 25 }, "businessSuccess": 0.5 },
+      { "text": "Find a partner", "effects": { "money": -25000, "happiness": 30, "smarts": 25 }, "businessSuccess": 0.65 },
+      { "text": "Give up on idea", "effects": { "happiness": -15, "smarts": -10 } }
+    ]
+  },
+  {
+    "id": "first_car_adult",
+    "text": "Time to buy your first car as an adult!",
+    "ageRange": [18, 30],
+    "choices": [
+      { "text": "Buy reliable sedan", "effects": { "money": -25000, "happiness": 25 }, "assetAdd": { "type": "car", "name": "Honda Accord", "value": 25000 } },
+      { "text": "Steal a car", "effects": { "money": 0, "happiness": -50, "health": -20 }, "crimeAdd": "Grand theft auto", "arrestChance": 0.7 },
+      { "text": "Get gifted car", "effects": { "happiness": 35, "money": 0 } },
+      { "text": "Use public transport", "effects": { "money": 5000, "happiness": -10, "health": 10 } }
+    ]
+  },
+  {
+    "id": "job_interview",
+    "text": "You have a job interview for your dream position!",
+    "ageRange": [22, 40],
+    "choices": [
+      { "text": "Prepare thoroughly", "effects": { "smarts": 25, "happiness": 30, "money": 5000 }, "jobOffer": { "title": "Junior Manager", "salary": 55000 } },
+      { "text": "Wing it", "effects": { "happiness": -15, "smarts": -10 } },
+      { "text": "Cheat on assessment", "effects": { "smarts": -25, "happiness": -30 }, "crimeAdd": "Fraud" },
+      { "text": "Bribe interviewer", "effects": { "money": -5000, "happiness": -40 }, "crimeAdd": "Bribery", "arrestChance": 0.6 }
+    ]
+  },
+  {
+    "id": "promotion_detailed",
+    "text": "Your manager is considering you for a promotion!",
+    "ageRange": [25, 60],
+    "requireJob": true,
+    "choices": [
+      { "text": "Accept promotion", "effects": { "happiness": 35, "money": 15000 }, "salaryIncrease": 15000 },
+      { "text": "Negotiate higher", "effects": { "happiness": 45, "money": 25000, "smarts": 20 }, "salaryIncrease": 25000 },
+      { "text": "Decline promotion", "effects": { "happiness": -20, "money": 0 } },
+      { "text": "Sabotage competitor", "effects": { "happiness": -35, "smarts": -25 }, "crimeAdd": "Corporate sabotage" }
+    ]
+  },
+  {
+    "id": "marriage_proposal_detailed",
+    "text": "Your long-term partner is proposing marriage!",
+    "ageRange": [22, 50],
+    "requireRelationship": "friend",
+    "choices": [
+      { "text": "Say yes happily", "effects": { "happiness": 50, "health": 10 }, "relationshipUpdate": { "type": "spouse" } },
+      { "text": "Refuse proposal", "effects": { "happiness": -35 }, "relationshipRemove": true },
+      { "text": "Prank them", "effects": { "happiness": -45, "looks": -20 } },
+      { "text": "Ask for time", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "have_baby",
+    "text": "You and your partner are having a baby!",
+    "ageRange": [20, 45],
+    "requireRelationship": "spouse",
+    "choices": [
+      { "text": "Celebrate together", "effects": { "happiness": 50, "money": -8000 }, "relationshipAdd": { "type": "child", "name": "Baby" } },
+      { "text": "Feel overwhelmed", "effects": { "happiness": 10, "health": -15, "money": -8000 }, "relationshipAdd": { "type": "child", "name": "Baby" } },
+      { "text": "Name the baby", "effects": { "happiness": 55, "money": -8000 }, "relationshipAdd": { "type": "child", "name": "Baby" } },
+      { "text": "Panic", "effects": { "happiness": -20, "health": -20, "money": -10000 } }
+    ]
+  },
+  {
+    "id": "buy_house_detailed",
+    "text": "A beautiful house is on the market! Can you afford it?",
+    "ageRange": [25, 60],
+    "choices": [
+      { "text": "Buy dream home", "effects": { "money": -450000, "happiness": 45 }, "requireMoney": 450000, "assetAdd": { "type": "house", "name": "Dream Home", "value": 450000 } },
+      { "text": "Buy starter home", "effects": { "money": -180000, "happiness": 30 }, "requireMoney": 180000, "assetAdd": { "type": "house", "name": "Starter Home", "value": 180000 } },
+      { "text": "Keep renting", "effects": { "happiness": -10 } },
+      { "text": "Invest instead", "effects": { "money": 20000, "happiness": 20, "smarts": 25 } }
+    ]
+  },
+  {
+    "id": "health_scare",
+    "text": "You're experiencing concerning health symptoms.",
+    "ageRange": [25, 80],
+    "choices": [
+      { "text": "See doctor immediately", "effects": { "health": 30, "happiness": 20, "money": -2000 } },
+      { "text": "Ignore symptoms", "effects": { "health": -40, "happiness": -25 } },
+      { "text": "Try home remedies", "effects": { "health": 5, "happiness": -10 } },
+      { "text": "Panic excessively", "effects": { "health": -15, "happiness": -30 } }
+    ]
+  },
+  {
+    "id": "executive_position",
+    "text": "You're being considered for an executive position!",
+    "ageRange": [35, 65],
+    "requireJob": true,
+    "choices": [
+      { "text": "Lead with integrity", "effects": { "happiness": 50, "money": 80000, "smarts": 30 }, "salaryIncrease": 80000 },
+      { "text": "Abuse your power", "effects": { "money": 50000, "happiness": -40 }, "crimeAdd": "Corporate misconduct", "arrestChance": 0.3 },
+      { "text": "Mentor others", "effects": { "happiness": 55, "smarts": 35, "money": 70000, "looks": 15 }, "salaryIncrease": 70000 },
+      { "text": "Fail at role", "effects": { "happiness": -50, "money": -30000 }, "jobRemove": true }
+    ]
+  },
+  {
+    "id": "start_charity",
+    "text": "You're thinking about starting a charitable foundation.",
+    "ageRange": [35, 70],
+    "choices": [
+      { "text": "Launch charity", "effects": { "happiness": 50, "money": -100000, "looks": 20 }, "requireMoney": 100000 },
+      { "text": "Scam donors", "effects": { "money": 200000, "happiness": -60 }, "crimeAdd": "Fraud", "arrestChance": 0.8 },
+      { "text": "Make it successful", "effects": { "happiness": 70, "money": -50000, "looks": 30 } },
+      { "text": "Abandon the idea", "effects": { "happiness": -15 } }
+    ]
+  },
+  {
+    "id": "retirement_planning",
+    "text": "You're planning for retirement. How will you prepare?",
+    "ageRange": [50, 65],
+    "choices": [
+      { "text": "Plan carefully", "effects": { "money": 50000, "happiness": 40, "smarts": 30 } },
+      { "text": "Procrastinate", "effects": { "money": -20000, "happiness": -30 } },
+      { "text": "Invest wisely", "effects": { "money": 100000, "happiness": 50, "smarts": 40 } },
+      { "text": "Spend recklessly", "effects": { "money": -80000, "happiness": 20 } }
+    ]
+  },
+  {
+    "id": "grandchild_born",
+    "text": "Your first grandchild was just born!",
+    "ageRange": [45, 80],
+    "choices": [
+      { "text": "Celebrate joyfully", "effects": { "happiness": 60, "health": 15 } },
+      { "text": "Feel old", "effects": { "happiness": -20, "health": -10 } },
+      { "text": "Spoil the baby", "effects": { "happiness": 70, "money": -5000 } },
+      { "text": "Stay distant", "effects": { "happiness": -30 } }
+    ]
+  },
+  {
+    "id": "write_will",
+    "text": "It's time to write your will and plan your legacy.",
+    "ageRange": [60, 100],
+    "choices": [
+      { "text": "Divide equally", "effects": { "happiness": 40, "smarts": 25 } },
+      { "text": "Favor one child", "effects": { "happiness": -20 } },
+      { "text": "Donate to charity", "effects": { "happiness": 60, "looks": 30, "money": -100000 } },
+      { "text": "Keep it secret", "effects": { "happiness": -30 } }
+    ]
+  },
+  {
+    "id": "travel_world",
+    "text": "You want to travel the world in your retirement!",
+    "ageRange": [60, 85],
+    "choices": [
+      { "text": "Adventure everywhere", "effects": { "happiness": 70, "health": 20, "money": -50000 }, "requireMoney": 50000 },
+      { "text": "Get scammed abroad", "effects": { "money": -30000, "happiness": -40 }, "requireMoney": 30000 },
+      { "text": "Skip traveling", "effects": { "happiness": -25 } },
+      { "text": "Relax at beach", "effects": { "happiness": 50, "health": 25, "money": -15000 }, "requireMoney": 15000 }
+    ]
+  },
+  {
+    "id": "spouse_death",
+    "text": "Your spouse has passed away. You're grieving deeply.",
+    "ageRange": [50, 100],
+    "requireRelationship": "spouse",
+    "choices": [
+      { "text": "Grieve properly", "effects": { "happiness": -50, "health": -20 }, "relationshipRemove": true },
+      { "text": "Move on quickly", "effects": { "happiness": -20, "health": 5 }, "relationshipRemove": true },
+      { "text": "Remarry soon", "effects": { "happiness": 20, "health": 10 }, "relationshipUpdate": { "type": "spouse" } },
+      { "text": "Withdraw from life", "effects": { "happiness": -70, "health": -40 }, "relationshipRemove": true }
+    ]
+  },
+  {
+    "id": "final_adventure",
+    "text": "You want one final grand adventure before it's too late!",
+    "ageRange": [70, 100],
+    "choices": [
+      { "text": "Try skydiving", "effects": { "happiness": 80, "health": -30, "money": -2000 } },
+      { "text": "Stay safe at home", "effects": { "happiness": -20 } },
+      { "text": "Succeed gloriously", "effects": { "happiness": 100, "health": -10, "looks": 40 } },
+      { "text": "Fail badly", "effects": { "happiness": -40, "health": -50 } }
+    ]
+  },
+  {
+    "id": "first_date",
+    "text": "You're going on your first date! Where should you take them?",
+    "ageRange": [16, 25],
+    "category": "relationship",
+    "choices": [
+      { "text": "Dinner and movie", "effects": { "happiness": 25, "looks": 10, "money": -80 } },
+      { "text": "Coffee shop", "effects": { "happiness": 20, "smarts": 10, "money": -15 } },
+      { "text": "Amusement park", "effects": { "happiness": 35, "health": 10, "money": -100 } },
+      { "text": "Be yourself", "effects": { "happiness": 30, "looks": 15 } }
+    ]
+  },
+  {
+    "id": "dating_app",
+    "text": "You're trying online dating. How's your profile?",
+    "ageRange": [18, 45],
+    "category": "relationship",
+    "choices": [
+      { "text": "Be honest", "effects": { "happiness": 20, "smarts": 10 } },
+      { "text": "Exaggerate everything", "effects": { "happiness": -15, "looks": -10 } },
+      { "text": "Get many matches", "effects": { "happiness": 35, "looks": 15 }, "relationshipAdd": { "type": "partner", "name": "Dating Match" } },
+      { "text": "Give up on apps", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "meet_parents",
+    "text": "Your partner wants you to meet their parents!",
+    "ageRange": [18, 35],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Make great impression", "effects": { "happiness": 35, "looks": 15, "smarts": 10 } },
+      { "text": "Embarrass yourself", "effects": { "happiness": -25, "looks": -15 } },
+      { "text": "Bring a gift", "effects": { "happiness": 30, "money": -50 } },
+      { "text": "Cancel last minute", "effects": { "happiness": -35 }, "relationshipUpdate": { "relationship": -30 } }
+    ]
+  },
+  {
+    "id": "move_in_together",
+    "text": "Your partner suggests moving in together!",
+    "ageRange": [20, 40],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Agree enthusiastically", "effects": { "happiness": 40, "money": -1500 } },
+      { "text": "Refuse gently", "effects": { "happiness": -20 }, "relationshipUpdate": { "relationship": -20 } },
+      { "text": "Split rent fairly", "effects": { "happiness": 35, "money": 500, "smarts": 15 } },
+      { "text": "Get cold feet", "effects": { "happiness": -30 }, "relationshipUpdate": { "relationship": -25 } }
+    ]
+  },
+  {
+    "id": "propose_to_partner",
+    "text": "You want to propose to your partner! How will you do it?",
+    "ageRange": [22, 50],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Romantic proposal", "effects": { "happiness": 55, "money": -5000 }, "requireMoney": 5000, "relationshipUpdate": { "type": "spouse" } },
+      { "text": "Simple proposal", "effects": { "happiness": 45, "money": -2000 }, "requireMoney": 2000, "relationshipUpdate": { "type": "spouse" } },
+      { "text": "Get rejected", "effects": { "happiness": -50, "health": -20 }, "relationshipRemove": true },
+      { "text": "Wait for them", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "anniversary_celebration",
+    "text": "It's your relationship anniversary! How will you celebrate?",
+    "ageRange": [18, 60],
+    "requireRelationship": "spouse",
+    "category": "relationship",
+    "choices": [
+      { "text": "Surprise vacation", "effects": { "happiness": 50, "health": 15, "money": -4000 }, "requireMoney": 4000 },
+      { "text": "Romantic dinner", "effects": { "happiness": 40, "money": -200 } },
+      { "text": "Forget it completely", "effects": { "happiness": -40, "looks": -15 }, "relationshipUpdate": { "relationship": -30 } },
+      { "text": "Heartfelt gift", "effects": { "happiness": 45, "money": -500 } }
+    ]
+  },
+  {
+    "id": "relationship_conflict",
+    "text": "You and your partner had a serious disagreement.",
+    "ageRange": [18, 70],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Apologize sincerely", "effects": { "happiness": 25, "smarts": 15 }, "relationshipUpdate": { "relationship": 15 } },
+      { "text": "Refuse to budge", "effects": { "happiness": -30, "smarts": -10 }, "relationshipUpdate": { "relationship": -25 } },
+      { "text": "Seek counseling", "effects": { "happiness": 30, "smarts": 20, "money": -300 }, "relationshipUpdate": { "relationship": 20 } },
+      { "text": "Break up", "effects": { "happiness": -45, "health": -15 }, "relationshipUpdate": { "type": "ex" } }
+    ]
+  },
+  {
+    "id": "flirting_opportunity",
+    "text": "Someone attractive is flirting with you at a party!",
+    "ageRange": [16, 40],
+    "category": "relationship",
+    "choices": [
+      { "text": "Flirt back", "effects": { "happiness": 25, "looks": 15 }, "relationshipAdd": { "type": "friend", "name": "Party Flirt" } },
+      { "text": "Ask them out", "effects": { "happiness": 35, "looks": 10, "money": -60 }, "relationshipAdd": { "type": "partner", "name": "Party Date" } },
+      { "text": "Play it cool", "effects": { "happiness": 10, "smarts": 10 } },
+      { "text": "Get nervous", "effects": { "happiness": -15, "looks": -10 } }
+    ]
+  },
+  {
+    "id": "speed_dating",
+    "text": "You're trying speed dating to meet new people!",
+    "ageRange": [21, 45],
+    "category": "relationship",
+    "choices": [
+      { "text": "Meet someone special", "effects": { "happiness": 35, "looks": 15, "money": -50 }, "relationshipAdd": { "type": "partner", "name": "Speed Date" } },
+      { "text": "No matches", "effects": { "happiness": -20, "looks": -10, "money": -50 } },
+      { "text": "Make new friends", "effects": { "happiness": 25, "smarts": 10, "money": -50 } },
+      { "text": "Too awkward", "effects": { "happiness": -15, "money": -50 } }
+    ]
+  },
+  {
+    "id": "long_distance",
+    "text": "Your partner is moving far away. Will you try long distance?",
+    "ageRange": [18, 40],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Stay committed", "effects": { "happiness": 20, "money": -2000 }, "relationshipUpdate": { "relationship": 10 } },
+      { "text": "Break up sadly", "effects": { "happiness": -35, "health": -15 }, "relationshipUpdate": { "type": "ex" } },
+      { "text": "Move with them", "effects": { "happiness": 40, "money": -10000, "smarts": 15 } },
+      { "text": "Cheat on them", "effects": { "happiness": -50, "looks": -25 }, "relationshipUpdate": { "type": "ex", "relationship": -50 } }
+    ]
+  },
+  {
+    "id": "valentine_day",
+    "text": "It's Valentine's Day! Do you have plans with someone special?",
+    "ageRange": [16, 70],
+    "category": "relationship",
+    "choices": [
+      { "text": "Romantic date", "effects": { "happiness": 40, "looks": 15, "money": -150 } },
+      { "text": "Spend it alone", "effects": { "happiness": -25 } },
+      { "text": "Galentine's with friends", "effects": { "happiness": 30, "money": -80 } },
+      { "text": "Propose on V-Day", "effects": { "happiness": 60, "money": -6000 }, "requireMoney": 6000, "relationshipUpdate": { "type": "spouse" } }
+    ]
+  },
+  {
+    "id": "jealousy_issue",
+    "text": "You're feeling jealous about your partner's close friend.",
+    "ageRange": [18, 50],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Talk about it", "effects": { "happiness": 20, "smarts": 15 }, "relationshipUpdate": { "relationship": 10 } },
+      { "text": "Get possessive", "effects": { "happiness": -30, "looks": -15 }, "relationshipUpdate": { "relationship": -25 } },
+      { "text": "Trust your partner", "effects": { "happiness": 35, "smarts": 20 }, "relationshipUpdate": { "relationship": 20 } },
+      { "text": "Spy on them", "effects": { "happiness": -40, "smarts": -20 }, "relationshipUpdate": { "relationship": -35 } }
+    ]
+  },
+  {
+    "id": "ex_returns",
+    "text": "Your ex wants to get back together!",
+    "ageRange": [18, 45],
+    "requireRelationship": "ex",
+    "category": "relationship",
+    "choices": [
+      { "text": "Give them chance", "effects": { "happiness": 25 }, "relationshipUpdate": { "type": "partner", "relationship": 40 } },
+      { "text": "Reject them firmly", "effects": { "happiness": 15, "smarts": 15 } },
+      { "text": "Just be friends", "effects": { "happiness": 20, "smarts": 10 }, "relationshipUpdate": { "type": "friend" } },
+      { "text": "Block them everywhere", "effects": { "happiness": 10 }, "relationshipRemove": true }
+    ]
+  },
+  {
+    "id": "blind_date",
+    "text": "Your friends set you up on a blind date!",
+    "ageRange": [18, 50],
+    "category": "relationship",
+    "choices": [
+      { "text": "Give it a chance", "effects": { "happiness": 30, "looks": 10, "money": -70 }, "relationshipAdd": { "type": "partner", "name": "Blind Date" } },
+      { "text": "Terrible match", "effects": { "happiness": -20, "money": -70 } },
+      { "text": "Cancel last minute", "effects": { "happiness": -15, "looks": -10 } },
+      { "text": "Best date ever", "effects": { "happiness": 50, "looks": 20, "money": -100 }, "relationshipAdd": { "type": "partner", "name": "Perfect Match" } }
+    ]
+  },
+  {
+    "id": "wedding_planning",
+    "text": "You're planning your wedding! How elaborate will it be?",
+    "ageRange": [22, 50],
+    "requireRelationship": "spouse",
+    "category": "relationship",
+    "choices": [
+      { "text": "Lavish ceremony", "effects": { "happiness": 60, "looks": 25, "money": -50000 }, "requireMoney": 50000 },
+      { "text": "Simple courthouse", "effects": { "happiness": 40, "money": -500 } },
+      { "text": "Destination wedding", "effects": { "happiness": 70, "health": 15, "looks": 30, "money": -75000 }, "requireMoney": 75000 },
+      { "text": "Elope together", "effects": { "happiness": 55, "money": -2000 } }
+    ]
+  },
+  {
+    "id": "relationship_milestone",
+    "text": "You and your partner just hit a major relationship milestone!",
+    "ageRange": [18, 60],
+    "requireRelationship": "partner",
+    "category": "relationship",
+    "choices": [
+      { "text": "Celebrate together", "effects": { "happiness": 45, "money": -200 } },
+      { "text": "Exchange promises", "effects": { "happiness": 50, "looks": 15 } },
+      { "text": "Take it for granted", "effects": { "happiness": -15 }, "relationshipUpdate": { "relationship": -10 } },
+      { "text": "Plan the future", "effects": { "happiness": 55, "smarts": 20 } }
+    ]
+  },
+  {
+    "id": "date_night_routine",
+    "text": "You haven't been on a date with your partner in months.",
+    "ageRange": [25, 70],
+    "requireRelationship": "spouse",
+    "category": "relationship",
+    "choices": [
+      { "text": "Plan romantic night", "effects": { "happiness": 35, "money": -150 }, "relationshipUpdate": { "relationship": 15 } },
+      { "text": "Ignore the problem", "effects": { "happiness": -25 }, "relationshipUpdate": { "relationship": -20 } },
+      { "text": "Weekend getaway", "effects": { "happiness": 50, "health": 10, "money": -1500 }, "relationshipUpdate": { "relationship": 25 } },
+      { "text": "Stay-at-home date", "effects": { "happiness": 30, "money": -50 }, "relationshipUpdate": { "relationship": 10 } }
+    ]
+  }
+]

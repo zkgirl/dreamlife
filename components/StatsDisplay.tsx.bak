@@ -1,0 +1,114 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { useGameStore } from '@/store/gameStore';
+
+export default function StatsDisplay() {
+  const { stats, symbols, job } = useGameStore();
+
+  const getStatColor = (stat: string, value: number) => {
+    if (stat === 'memory') {
+      if (value < 30) return 'border-dream-crack text-dream-crack';
+      if (value > 70) return 'border-dream-bloom text-dream-bloom';
+    }
+    if (value < 30) return 'border-red-500 text-red-400';
+    if (value > 70) return 'border-green-500 text-green-400';
+    return 'border-dream-glow text-dream-glow';
+  };
+
+  const getStatOpacity = (value: number) => {
+    return Math.max(0.4, value / 100);
+  };
+
+  const unlockedSymbols = symbols.filter(s => s.unlocked);
+
+  return (
+    <div className="fixed top-0 left-0 right-0 p-6 z-50">
+      <div className="max-w-7xl mx-auto">
+        {/* Age Display */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-4"
+        >
+          <h1 className="text-4xl font-bold text-glow text-dream-bloom">
+            Age {stats.age}
+          </h1>
+          {job && (
+            <p className="text-dream-whisper text-sm mt-1">{job.title}</p>
+          )}
+        </motion.div>
+
+        {/* Stats Orbs */}
+        <div className="flex justify-center gap-4 flex-wrap">
+          <motion.div
+            className={`stat-orb ${getStatColor('energy', stats.energy)}`}
+            style={{ opacity: getStatOpacity(stats.energy) }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="text-xs uppercase tracking-wider opacity-75">Energy</div>
+            <div className="text-2xl font-bold">{stats.energy}</div>
+          </motion.div>
+
+          <motion.div
+            className={`stat-orb ${getStatColor('lucidity', stats.lucidity)}`}
+            style={{ opacity: getStatOpacity(stats.lucidity) }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="text-xs uppercase tracking-wider opacity-75">Lucidity</div>
+            <div className="text-2xl font-bold">{stats.lucidity}</div>
+          </motion.div>
+
+          <motion.div
+            className={`stat-orb ${getStatColor('aura', stats.aura)}`}
+            style={{ opacity: getStatOpacity(stats.aura) }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="text-xs uppercase tracking-wider opacity-75">Aura</div>
+            <div className="text-2xl font-bold">{stats.aura}</div>
+          </motion.div>
+
+          <motion.div
+            className={`stat-orb ${getStatColor('memory', stats.memory)}`}
+            style={{ opacity: getStatOpacity(stats.memory) }}
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="text-xs uppercase tracking-wider opacity-75">Memory</div>
+            <div className="text-2xl font-bold">{stats.memory}</div>
+          </motion.div>
+
+          <motion.div
+            className="stat-orb border-amber-500 text-amber-400"
+            whileHover={{ scale: 1.1 }}
+          >
+            <div className="text-xs uppercase tracking-wider opacity-75">Shards</div>
+            <div className="text-2xl font-bold">{stats.shards}</div>
+          </motion.div>
+        </div>
+
+        {/* Symbols Garden */}
+        {unlockedSymbols.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-4 flex justify-center gap-2"
+          >
+            {unlockedSymbols.map((symbol, i) => (
+              <motion.div
+                key={symbol.id}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className="w-8 h-8 rounded-full bg-dream-bloom/20 border-2 border-dream-bloom
+                          flex items-center justify-center text-xs animate-pulse-glow"
+                title={symbol.name}
+              >
+                ✦
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}

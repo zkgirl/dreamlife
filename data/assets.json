@@ -1,0 +1,58 @@
+[
+  {
+    "id": "toyota_camry",
+    "name": "Toyota Camry",
+    "type": "car",
+    "cost": 30000,
+    "value": 30000
+  },
+  {
+    "id": "bmw_x5",
+    "name": "BMW X5",
+    "type": "car",
+    "cost": 65000,
+    "value": 65000
+  },
+  {
+    "id": "ferrari",
+    "name": "Ferrari 488",
+    "type": "car",
+    "cost": 250000,
+    "value": 250000
+  },
+  {
+    "id": "apartment",
+    "name": "Small Apartment",
+    "type": "house",
+    "cost": 150000,
+    "value": 150000
+  },
+  {
+    "id": "suburban_house",
+    "name": "Suburban House",
+    "type": "house",
+    "cost": 350000,
+    "value": 350000
+  },
+  {
+    "id": "mansion",
+    "name": "Luxury Mansion",
+    "type": "house",
+    "cost": 2000000,
+    "value": 2000000
+  },
+  {
+    "id": "yacht",
+    "name": "Yacht",
+    "type": "other",
+    "cost": 500000,
+    "value": 500000
+  },
+  {
+    "id": "jet",
+    "name": "Private Jet",
+    "type": "other",
+    "cost": 5000000,
+    "value": 5000000
+  }
+]

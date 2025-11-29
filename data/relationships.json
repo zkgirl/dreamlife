@@ -1,0 +1,69 @@
+[
+  {
+    "id": "mirror_lover",
+    "name": "Mirror Lover",
+    "type": "partner",
+    "description": "A reflection that became real, or real that became reflection.",
+    "bondRequirement": 50,
+    "effects": {
+      "memory": 15,
+      "aura": 10
+    }
+  },
+  {
+    "id": "echo_friend",
+    "name": "Echo Friend",
+    "type": "echo",
+    "description": "A companion who existed before you dreamed them.",
+    "bondRequirement": 30,
+    "effects": {
+      "memory": 10,
+      "energy": 5
+    }
+  },
+  {
+    "id": "void_mentor",
+    "name": "Void Mentor",
+    "type": "echo",
+    "description": "An ancient presence that guides you through darkness.",
+    "bondRequirement": 60,
+    "effects": {
+      "lucidity": 15,
+      "memory": 10
+    }
+  },
+  {
+    "id": "star_child",
+    "name": "Star Child",
+    "type": "child",
+    "description": "Born from wishes and moonlight.",
+    "bondRequirement": 70,
+    "effects": {
+      "memory": 20,
+      "aura": 15,
+      "energy": -5
+    }
+  },
+  {
+    "id": "shadow_sibling",
+    "name": "Shadow Sibling",
+    "type": "echo",
+    "description": "The part of you that you tried to forget.",
+    "bondRequirement": 40,
+    "effects": {
+      "memory": 15,
+      "lucidity": 10
+    }
+  },
+  {
+    "id": "forgotten_parent",
+    "name": "Forgotten Parent",
+    "type": "echo",
+    "description": "Someone who raised you in a life that never was.",
+    "bondRequirement": 80,
+    "effects": {
+      "memory": 25,
+      "energy": 10
+    }
+  }
+]
