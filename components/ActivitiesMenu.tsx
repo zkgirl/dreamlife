@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { useState } from 'react';
 import { showStatChange } from './StatChangeNotification';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 
 interface ActivitiesMenuProps {
   onClose: () => void;
@@ -74,54 +75,64 @@ const activityCategories = [
 
 export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const { stats, education, updateStats, addMoney, spendMoney, addPet, addSocialMedia, addActivity, addHistory, addCrime, toggleEducationMenu } = useGameStore();
+  const { playButtonClick, playMenuClose, playTabSwitch, playPurchase, playMoneyGain, playMoneyLoss, playNewRelationship, playArgument, playGift } = useSoundEffects();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategoryClick = (categoryId: string) => {
+    playTabSwitch();
     // Check age restrictions
     if (categoryId === 'mind-body') {
       if (stats.age < 5) {
+        playButtonClick();
         alert('You are too young for these activities! (Minimum age: 5)');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'salon') {
       if (stats.age < 13) {
+        playButtonClick();
         alert('You are too young for the salon! (Minimum age: 13)');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'surgery') {
       if (stats.age < 18) {
+        playButtonClick();
         alert('You must be 18 or older for plastic surgery!');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'crime') {
       if (stats.age < 16) {
+        playButtonClick();
         alert('You are too young for criminal activities! (Minimum age: 16)');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'gambling') {
       if (stats.age < 18) {
+        playButtonClick();
         alert('You must be 18 or older to gamble!');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'social-media') {
       if (stats.age < 13) {
+        playButtonClick();
         alert('You are too young for social media! (Minimum age: 13)');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'pets') {
       if (stats.age < 10) {
+        playButtonClick();
         alert('You are too young to adopt a pet! (Minimum age: 10)');
         return;
       }
       setSelectedCategory(categoryId);
     } else if (categoryId === 'travel') {
       if (stats.age < 16) {
+        playButtonClick();
         alert('You are too young to travel alone! (Minimum age: 16)');
         return;
       }
@@ -134,15 +145,18 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   };
 
   const renderMindBodyActivities = () => (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
-      <h2 className="text-white text-2xl font-bold mb-6">Mind & Body</h2>
+      <h2 className="text-white text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Mind & Body</h2>
       <div className="space-y-3">
         <button
           onClick={() => {
@@ -151,11 +165,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
               return;
             }
             if (spendMoney(50)) {
+              playPurchase();
               showStatChange('health', 10);
               showStatChange('looks', 5);
               updateStats({ health: 10, looks: 5 });
               addHistory('activity', 'Went to the gym');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -171,6 +188,7 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
 
         <button
           onClick={() => {
+            playButtonClick();
             showStatChange('smarts', 5);
             showStatChange('happiness', 5);
             updateStats({ smarts: 5, happiness: 5 });
@@ -187,6 +205,7 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
 
         <button
           onClick={() => {
+            playButtonClick();
             showStatChange('happiness', 10);
             showStatChange('health', 5);
             updateStats({ happiness: 10, health: 5 });
@@ -208,11 +227,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
               return;
             }
             if (spendMoney(30)) {
+              playPurchase();
               showStatChange('health', 8);
               showStatChange('happiness', 8);
               updateStats({ health: 8, happiness: 8 });
               addHistory('activity', 'Practiced yoga');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -232,6 +254,7 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
               alert('You must be 8 or older to go running!');
               return;
             }
+            playButtonClick();
             showStatChange('health', 12);
             showStatChange('looks', 3);
             updateStats({ health: 12, looks: 3 });
@@ -253,11 +276,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
               return;
             }
             if (spendMoney(40)) {
+              playPurchase();
               showStatChange('health', 15);
               showStatChange('happiness', 10);
               updateStats({ health: 15, happiness: 10 });
               addHistory('activity', 'Played sports');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -275,12 +301,15 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   );
 
   const renderSalonActivities = () => (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Salon & Spa</h2>
@@ -288,11 +317,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(30)) {
+              playPurchase();
               showStatChange('looks', 5);
               showStatChange('happiness', 5);
               updateStats({ looks: 5, happiness: 5 });
               addHistory('activity', 'Got a fresh haircut');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -309,11 +341,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(50)) {
+              playPurchase();
               showStatChange('looks', 8);
               showStatChange('happiness', 8);
               updateStats({ looks: 8, happiness: 8 });
               addHistory('activity', 'Got a manicure and pedicure');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -330,12 +365,15 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(150)) {
+              playPurchase();
               showStatChange('looks', 12);
               showStatChange('happiness', 15);
               showStatChange('health', 5);
               updateStats({ looks: 12, happiness: 15, health: 5 });
               addHistory('activity', 'Enjoyed a spa day');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -352,11 +390,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(80)) {
+              playPurchase();
               showStatChange('looks', 10);
               showStatChange('happiness', 6);
               updateStats({ looks: 10, happiness: 6 });
               addHistory('activity', 'Got a facial treatment');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -376,10 +417,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderSurgeryActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Plastic Surgery</h2>
@@ -387,11 +431,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(5000)) {
+              playPurchase();
               showStatChange('looks', 20);
               showStatChange('health', -5);
               updateStats({ looks: 20, health: -5 });
               addHistory('activity', 'Got a nose job');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -408,11 +455,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(2000)) {
+              playPurchase();
               showStatChange('looks', 10);
               showStatChange('health', -2);
               updateStats({ looks: 10, health: -2 });
               addHistory('activity', 'Got Botox injections');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -429,11 +479,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(8000)) {
+              playPurchase();
               showStatChange('looks', 25);
               showStatChange('health', -8);
               updateStats({ looks: 25, health: -8 });
               addHistory('activity', 'Got a facelift');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -450,11 +503,14 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(3000)) {
+              playPurchase();
               showStatChange('looks', 15);
               showStatChange('health', -4);
               updateStats({ looks: 15, health: -4 });
               addHistory('activity', 'Got lip fillers');
               onClose();
+            } else {
+              playButtonClick();
             }
           }}
           className="w-full text-left p-4 rounded-lg bg-[#193326]/50 border border-white/10 hover:bg-white/5 transition-colors"
@@ -474,10 +530,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderCrimeActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6 text-red-400">Crime</h2>
@@ -485,14 +544,17 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
       <div className="space-y-3">
         <button
           onClick={() => {
+            playButtonClick();
             const caught = Math.random() < 0.2;
             if (caught) {
+              playMoneyLoss();
               showStatChange('happiness', -20);
               showStatChange('money', -500);
               updateStats({ happiness: -20 });
               spendMoney(500);
               addHistory('activity', 'Attempted shoplifting but got caught!');
             } else {
+              playMoneyGain();
               addMoney(200);
               showStatChange('money', 200);
               showStatChange('happiness', 5);
@@ -514,14 +576,17 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
 
         <button
           onClick={() => {
+            playButtonClick();
             const caught = Math.random() < 0.3;
             if (caught) {
+              playMoneyLoss();
               showStatChange('happiness', -30);
               showStatChange('money', -2000);
               updateStats({ happiness: -30 });
               spendMoney(2000);
               addHistory('activity', 'Attempted burglary but got caught!');
             } else {
+              playMoneyGain();
               addMoney(1500);
               showStatChange('money', 1500);
               showStatChange('happiness', -10);
@@ -603,10 +668,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderGamblingActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Gambling</h2>
@@ -642,7 +710,9 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(50)) {
+              playPurchase();
               if (Math.random() < 0.01) {
+                playMoneyGain();
                 addMoney(50000);
                 showStatChange('money', 50000);
                 showStatChange('happiness', 50);
@@ -729,10 +799,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderPetsActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Adopt a Pet</h2>
@@ -740,6 +813,7 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         <button
           onClick={() => {
             if (spendMoney(500)) {
+              playNewRelationship();
               addPet({
                 id: Date.now().toString(),
                 name: 'Buddy',
@@ -859,10 +933,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderTravelActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Travel Destinations</h2>
@@ -978,10 +1055,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderDoctorActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Medical Care</h2>
@@ -1072,16 +1152,20 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderSocialMediaActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Social Media</h2>
       <div className="space-y-3">
         <button
           onClick={() => {
+            playButtonClick();
             addSocialMedia('Instagram');
             showStatChange('happiness', 5);
             updateStats({ happiness: 5 });
@@ -1098,6 +1182,7 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
 
         <button
           onClick={() => {
+            playButtonClick();
             addSocialMedia('TikTok');
             showStatChange('happiness', 8);
             updateStats({ happiness: 8 });
@@ -1150,10 +1235,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
   const renderEducationActivities = () => (
     <div className="p-6">
       <button
-        onClick={() => setSelectedCategory(null)}
-        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2"
+        onClick={() => {
+          playTabSwitch();
+          setSelectedCategory(null);
+        }}
+        className="mb-4 text-[#92c9ad] hover:text-primary flex items-center gap-2 text-sm sm:text-base"
       >
-        <span className="material-symbols-outlined">arrow_back</span>
+        <span className="material-symbols-outlined text-xl sm:text-2xl">arrow_back</span>
         Back
       </button>
       <h2 className="text-white text-2xl font-bold mb-6">Education</h2>
@@ -1296,23 +1384,29 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
+        onClick={() => {
+          playMenuClose();
+          onClose();
+        }}
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-white/10 rounded-xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
-            <h1 className="text-white text-2xl font-bold">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4">
+            <h1 className="text-white text-xl sm:text-2xl font-bold">
               {selectedCategory ? 'Activities' : 'Activities'}
             </h1>
             <button
-              onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              onClick={() => {
+                playMenuClose();
+                onClose();
+              }}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
@@ -1341,9 +1435,9 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
             ) : selectedCategory === 'education' ? (
               renderEducationActivities()
             ) : (
-              <div className="p-6">
-                <h1 className="text-white text-3xl font-bold mb-6">Activities</h1>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              <div className="p-4 sm:p-6">
+                <h1 className="text-white text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Activities</h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {activityCategories.map((category) => (
                     <motion.div
                       key={category.id}
@@ -1365,10 +1459,13 @@ export default function ActivitiesMenu({ onClose }: ActivitiesMenuProps) {
           </div>
 
           {/* Footer with Age Up Button */}
-          <div className="border-t border-white/10 p-6 flex justify-center">
+          <div className="border-t border-white/10 p-4 sm:p-6 flex justify-center">
             <button
-              onClick={onClose}
-              className="w-full max-w-xs rounded-full h-14 px-5 bg-primary text-background-dark text-lg font-bold hover:bg-green-300 transition-colors transform hover:scale-105"
+              onClick={() => {
+                playMenuClose();
+                onClose();
+              }}
+              className="w-full sm:w-auto sm:max-w-xs rounded-full h-12 sm:h-14 px-5 bg-primary text-background-dark text-base sm:text-lg font-bold hover:bg-green-300 transition-colors transform hover:scale-105"
             >
               Close
             </button>

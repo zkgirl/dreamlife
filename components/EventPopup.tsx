@@ -1,6 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
+import { useEffect } from 'react';
 
 interface Choice {
   text: string;
@@ -32,6 +34,15 @@ const eventImages = {
 };
 
 export default function EventPopup({ event, money, onChoice, onDismiss, isVisible }: EventPopupProps) {
+  const { playEventPopup, playEventPositive, playEventNegative, playButtonClick, playMenuClose } = useSoundEffects();
+
+  // Play event popup sound when event appears
+  useEffect(() => {
+    if (event && isVisible) {
+      playEventPopup();
+    }
+  }, [event, isVisible, playEventPopup]);
+
   if (!event || !isVisible) return null;
 
   const canAfford = (choice: Choice) => {
@@ -52,7 +63,10 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 pointer-events-auto"
-        onClick={onDismiss}
+        onClick={() => {
+          playMenuClose();
+          onDismiss();
+        }}
       >
         {/* Dreamy floating particles in background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -88,7 +102,10 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
         >
           {/* Close Button */}
           <button
-            onClick={onDismiss}
+            onClick={() => {
+              playMenuClose();
+              onDismiss();
+            }}
             className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 flex h-10 w-10 sm:h-8 sm:w-8 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70 backdrop-blur-sm"
           >
             <span className="material-symbols-outlined text-xl">close</span>
@@ -128,7 +145,24 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
                     onClick={() => {
                       console.log('Choice clicked:', choice.text);
                       if (affordable) {
+                        playButtonClick();
+                        // Determine if positive or negative based on effects
+                        if (choice.effects) {
+                          const hasPositive = Object.values(choice.effects).some(v => typeof v === 'number' && v > 0);
+                          const hasNegative = Object.values(choice.effects).some(v => typeof v === 'number' && v < 0);
+                          if (hasPositive && !hasNegative) {
+                            playEventPositive();
+                          } else if (hasNegative) {
+                            playEventNegative();
+                          } else {
+                            playButtonClick();
+                          }
+                        } else {
+                          playButtonClick();
+                        }
                         onChoice(choice);
+                      } else {
+                        playButtonClick();
                       }
                     }}
                     disabled={!affordable}
@@ -159,6 +193,7 @@ export default function EventPopup({ event, money, onChoice, onDismiss, isVisibl
               <button
                 onClick={() => {
                   console.log('Ignore clicked');
+                  playMenuClose();
                   onDismiss();
                 }}
                 className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-transparent text-white/60 transition-colors hover:bg-white/10 text-base font-medium leading-normal tracking-wide relative z-10"

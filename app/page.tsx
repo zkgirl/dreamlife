@@ -17,7 +17,6 @@ import ShoppingMenu from '@/components/ShoppingMenu';
 import AssetsMenu from '@/components/AssetsMenu';
 import SettingsMenu from '@/components/SettingsMenu';
 import EventPopup from '@/components/EventPopup';
-import HistoryPanel from '@/components/HistoryPanel';
 import StatChangeNotification, { showStatChange } from '@/components/StatChangeNotification';
 import BackgroundMusic from '@/components/BackgroundMusic';
 
@@ -410,8 +409,6 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* History Panel */}
-      <HistoryPanel />
 
       {/* Stat Change Notifications */}
       <StatChangeNotification />

@@ -73,26 +73,26 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-glow"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-3xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
-            <h1 className="text-white text-2xl font-bold">⚙️ Settings</h1>
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
+            <h1 className="text-white text-xl sm:text-2xl font-bold">⚙️ Settings</h1>
             <button
               onClick={handleClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
           </div>
 
           {/* Content */}
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6">
             <div className="space-y-6">
               {/* Audio Settings */}
-              <div className="bg-[#34495e] rounded-xl p-6 border border-white/10">
-                <h2 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary">volume_up</span>
+              <div className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-white text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">volume_up</span>
                   Audio
                 </h2>
                 <div className="space-y-6">
@@ -104,14 +104,14 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
                     <motion.button
                       onClick={handleSoundToggle}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-14 h-8 rounded-full transition-all ${
+                      className={`w-12 sm:w-14 h-7 sm:h-8 rounded-full transition-all flex-shrink-0 ${
                         soundEnabled ? 'bg-primary' : 'bg-gray-600'
                       }`}
                     >
                       <motion.div
-                        animate={{ x: soundEnabled ? 24 : 0 }}
+                        animate={{ x: soundEnabled ? 20 : 0 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                        className="w-6 h-6 bg-white rounded-full ml-1 mt-1"
+                        className="w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full ml-1 mt-1"
                       />
                     </motion.button>
                   </div>
@@ -157,9 +157,9 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
               </div>
 
               {/* Game Settings */}
-              <div className="bg-[#34495e] rounded-xl p-6 border border-white/10">
-                <h2 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary">sports_esports</span>
+              <div className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-white text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">sports_esports</span>
                   Gameplay
                 </h2>
                 <div className="space-y-4">
@@ -171,14 +171,14 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
                     <motion.button
                       onClick={() => setNotificationsEnabled(!notificationsEnabled)}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-14 h-8 rounded-full transition-all ${
+                      className={`w-12 sm:w-14 h-7 sm:h-8 rounded-full transition-all flex-shrink-0 ${
                         notificationsEnabled ? 'bg-primary' : 'bg-gray-600'
                       }`}
                     >
                       <motion.div
-                        animate={{ x: notificationsEnabled ? 24 : 0 }}
+                        animate={{ x: notificationsEnabled ? 20 : 0 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                        className="w-6 h-6 bg-white rounded-full ml-1 mt-1"
+                        className="w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full ml-1 mt-1"
                       />
                     </motion.button>
                   </div>
@@ -191,14 +191,14 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
                     <motion.button
                       onClick={() => setAutosaveEnabled(!autosaveEnabled)}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-14 h-8 rounded-full transition-all ${
+                      className={`w-12 sm:w-14 h-7 sm:h-8 rounded-full transition-all flex-shrink-0 ${
                         autosaveEnabled ? 'bg-primary' : 'bg-gray-600'
                       }`}
                     >
                       <motion.div
-                        animate={{ x: autosaveEnabled ? 24 : 0 }}
+                        animate={{ x: autosaveEnabled ? 20 : 0 }}
                         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                        className="w-6 h-6 bg-white rounded-full ml-1 mt-1"
+                        className="w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full ml-1 mt-1"
                       />
                     </motion.button>
                   </div>
@@ -227,9 +227,9 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
               </div>
 
               {/* About */}
-              <div className="bg-[#34495e] rounded-xl p-6 border border-white/10">
-                <h2 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary">info</span>
+              <div className="bg-[#34495e] rounded-xl p-4 sm:p-6 border border-white/10">
+                <h2 className="text-white text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">info</span>
                   About
                 </h2>
                 <div className="space-y-2 text-gray-300">
@@ -244,11 +244,11 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
           </div>
 
           {/* Footer */}
-          <div className="border-t border-white/10 p-4 flex gap-3">
+          <div className="border-t border-white/10 p-4 flex flex-col sm:flex-row gap-3">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 py-3 bg-red-500/20 text-red-400 rounded-lg font-bold hover:bg-red-500/30 transition-all"
+              className="flex-1 py-3 bg-red-500/20 text-red-400 rounded-lg font-bold hover:bg-red-500/30 transition-all text-sm sm:text-base"
             >
               Reset Game
             </motion.button>
@@ -256,7 +256,7 @@ export default function SettingsMenu({ onClose }: SettingsMenuProps) {
               onClick={handleSaveSettings}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex-1 py-3 bg-gradient-to-r from-primary to-emerald-400 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-primary/50 transition-all"
+              className="flex-1 py-3 bg-gradient-to-r from-primary to-emerald-400 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-primary/50 transition-all text-sm sm:text-base"
             >
               Save Settings
             </motion.button>

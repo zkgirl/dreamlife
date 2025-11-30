@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { useState } from 'react';
 import { showStatChange } from './StatChangeNotification';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 
 interface ShoppingMenuProps {
   onClose: () => void;
@@ -78,6 +79,7 @@ const categories = [
 
 export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
   const { stats, spendMoney, updateStats, addAsset, addHistory } = useGameStore();
+  const { playPurchase, playMenuClose, playTabSwitch, playButtonClick } = useSoundEffects();
   const [selectedCategory, setSelectedCategory] = useState<string>('vehicles');
 
   const filteredItems = shopItems.filter(item => item.category === selectedCategory);
@@ -95,6 +97,8 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
     }
 
     if (spendMoney(item.price)) {
+      playPurchase();
+      
       // Add to assets if it's a physical item
       if (item.category === 'vehicles' || item.category === 'realestate') {
         addAsset({
@@ -128,7 +132,10 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
+        onClick={() => {
+          playMenuClose();
+          onClose();
+        }}
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -144,7 +151,10 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
               <p className="text-[#92c9ad] text-xs sm:text-sm">Your money: ${stats.money.toLocaleString()}</p>
             </div>
             <button
-              onClick={onClose}
+              onClick={() => {
+                playMenuClose();
+                onClose();
+              }}
               className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
@@ -159,7 +169,12 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
                 {categories.map((category) => (
                   <motion.button
                     key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
+                    onClick={() => {
+                      if (selectedCategory !== category.id) {
+                        playTabSwitch();
+                      }
+                      setSelectedCategory(category.id);
+                    }}
                     whileHover={{ scale: 1.02, x: 5 }}
                     whileTap={{ scale: 0.98 }}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 relative overflow-hidden ${
@@ -229,7 +244,10 @@ export default function ShoppingMenu({ onClose }: ShoppingMenuProps) {
                           ${item.price.toLocaleString()}
                         </span>
                         <motion.button
-                          onClick={() => handlePurchase(item)}
+                          onClick={() => {
+                            playButtonClick();
+                            handlePurchase(item);
+                          }}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           disabled={Boolean(stats.money < item.price || (item.minAge && stats.age < item.minAge))}

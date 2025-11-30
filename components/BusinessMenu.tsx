@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { useState } from 'react';
 import { showStatChange } from './StatChangeNotification';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 
 interface BusinessMenuProps {
   onClose: () => void;
@@ -118,6 +119,7 @@ const businessTypes: BusinessType[] = [
 
 export default function BusinessMenu({ onClose }: BusinessMenuProps) {
   const { stats, education, businesses, addBusiness, updateBusiness, removeBusiness, spendMoney, addMoney, updateStats, addHistory } = useGameStore();
+  const { playButtonClick, playMenuClose, playTabSwitch, playBusinessStart, playBusinessSuccess, playSell, playMoneyGain } = useSoundEffects();
   const [selectedTab, setSelectedTab] = useState<'start' | 'manage'>('start');
   const [expandedBusinessId, setExpandedBusinessId] = useState<string | null>(null);
 
@@ -137,6 +139,7 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
 
   const handleStartBusiness = (businessType: BusinessType) => {
     if (!canStartBusiness(businessType)) {
+      playButtonClick();
       if (stats.age < businessType.minAge) {
         alert(`You must be at least ${businessType.minAge} years old to start this business!`);
       } else if (stats.money < businessType.startupCost) {
@@ -148,8 +151,11 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
     }
 
     if (!spendMoney(businessType.startupCost)) {
+      playButtonClick();
       return;
     }
+
+    playBusinessStart();
 
     const newBusiness = {
       id: Date.now().toString(),
@@ -177,9 +183,12 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
     const upgradeCost = Math.floor(business.value * 0.5); // 50% of business value
 
     if (!spendMoney(upgradeCost)) {
+      playButtonClick();
       alert(`You need $${upgradeCost.toLocaleString()} to upgrade this business!`);
       return;
     }
+
+    playBusinessSuccess();
 
     const revenueIncrease = Math.floor(business.revenue * 0.3); // 30% revenue boost
     const newReputation = Math.min(100, business.reputation + 10);
@@ -205,16 +214,21 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
     const salePrice = Math.floor(business.value * (business.reputation / 100) * 1.2);
 
     if (confirm(`Sell ${business.name} for $${salePrice.toLocaleString()}?`)) {
+      playSell();
+      playMoneyGain();
       addMoney(salePrice);
       removeBusiness(businessId);
       showStatChange('money', salePrice);
       addHistory('milestone', `Sold ${business.name} for $${salePrice.toLocaleString()}`);
 
       alert(`💰 Sold ${business.name} for $${salePrice.toLocaleString()}!`);
+    } else {
+      playButtonClick();
     }
   };
 
   const toggleExpanded = (businessId: string) => {
+    playButtonClick();
     setExpandedBusinessId(expandedBusinessId === businessId ? null : businessId);
   };
 
@@ -228,21 +242,24 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
+        onClick={() => {
+          playMenuClose();
+          onClose();
+        }}
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-glow"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
             <div>
-              <h1 className="text-white text-2xl font-bold">💼 Business Empire</h1>
+              <h1 className="text-white text-xl sm:text-2xl font-bold">💼 Business Empire</h1>
               {businesses.length > 0 && (
-                <div className="flex gap-4 mt-1 text-sm">
+                <div className="flex flex-wrap gap-2 sm:gap-4 mt-1 text-xs sm:text-sm">
                   <span className="text-[#92c9ad]">
                     💰 ${totalRevenue.toLocaleString()}/year
                   </span>
@@ -253,18 +270,26 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
               )}
             </div>
             <button
-              onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              onClick={() => {
+                playMenuClose();
+                onClose();
+              }}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
           </div>
 
           {/* Tabs */}
-          <div className="flex border-b border-white/10 px-6">
+          <div className="flex px-4 sm:px-6">
             <button
-              onClick={() => setSelectedTab('start')}
-              className={`px-4 py-3 font-semibold transition-all ${
+              onClick={() => {
+                if (selectedTab !== 'start') {
+                  playTabSwitch();
+                }
+                setSelectedTab('start');
+              }}
+              className={`px-3 sm:px-4 py-3 font-semibold transition-all whitespace-nowrap text-sm sm:text-base ${
                 selectedTab === 'start'
                   ? 'text-primary border-b-2 border-primary'
                   : 'text-white/60 hover:text-white'
@@ -273,8 +298,13 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
               🚀 Start Business
             </button>
             <button
-              onClick={() => setSelectedTab('manage')}
-              className={`px-4 py-3 font-semibold transition-all ${
+              onClick={() => {
+                if (selectedTab !== 'manage') {
+                  playTabSwitch();
+                }
+                setSelectedTab('manage');
+              }}
+              className={`px-3 sm:px-4 py-3 font-semibold transition-all whitespace-nowrap text-sm sm:text-base ${
                 selectedTab === 'manage'
                   ? 'text-primary border-b-2 border-primary'
                   : 'text-white/60 hover:text-white'
@@ -285,9 +315,9 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
           </div>
 
           {/* Content */}
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6">
             {selectedTab === 'start' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {businessTypes.map((businessType) => {
                   const canStart = canStartBusiness(businessType);
 
@@ -301,9 +331,9 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
                         canStart ? 'hover:border-primary/50 cursor-pointer' : 'opacity-60'
                       } transition-all`}
                     >
-                      <div className="text-4xl mb-3">{businessType.icon}</div>
-                      <h3 className="text-white font-bold text-lg mb-2">{businessType.name}</h3>
-                      <p className="text-white/70 text-sm mb-3">{businessType.description}</p>
+                      <div className="text-3xl sm:text-4xl mb-3">{businessType.icon}</div>
+                      <h3 className="text-white font-bold text-base sm:text-lg mb-2 truncate">{businessType.name}</h3>
+                      <p className="text-white/70 text-xs sm:text-sm mb-3 break-words">{businessType.description}</p>
 
                       <div className="space-y-2 mb-4">
                         <div className="flex justify-between text-sm">
@@ -326,11 +356,14 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
                       </div>
 
                       <motion.button
-                        onClick={() => handleStartBusiness(businessType)}
+                        onClick={() => {
+                          playButtonClick();
+                          handleStartBusiness(businessType);
+                        }}
                         disabled={!canStart}
                         whileHover={canStart ? { scale: 1.05 } : {}}
                         whileTap={canStart ? { scale: 0.95 } : {}}
-                        className={`w-full py-2 rounded-full font-bold transition-all ${
+                        className={`w-full py-2 sm:py-3 rounded-full font-bold transition-all text-sm sm:text-base ${
                           canStart
                             ? 'bg-gradient-to-r from-primary to-emerald-400 text-white hover:shadow-lg'
                             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
@@ -364,31 +397,31 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
                           <div className="flex justify-between items-start mb-3">
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="text-3xl">{businessTypes.find(t => t.id === business.type)?.icon || '💼'}</span>
-                                <div>
-                                  <h3 className="text-white font-bold text-xl">{business.name}</h3>
-                                  <p className="text-[#92c9ad] text-sm">Owned for {business.yearsOwned} {business.yearsOwned === 1 ? 'year' : 'years'}</p>
+                                <span className="text-2xl sm:text-3xl flex-shrink-0">{businessTypes.find(t => t.id === business.type)?.icon || '💼'}</span>
+                                <div className="min-w-0 flex-1">
+                                  <h3 className="text-white font-bold text-lg sm:text-xl truncate">{business.name}</h3>
+                                  <p className="text-[#92c9ad] text-xs sm:text-sm">Owned for {business.yearsOwned} {business.yearsOwned === 1 ? 'year' : 'years'}</p>
                                 </div>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className="text-green-400 font-bold text-xl">${business.revenue.toLocaleString()}</p>
+                            <div className="text-right flex-shrink-0">
+                              <p className="text-green-400 font-bold text-lg sm:text-xl">${business.revenue.toLocaleString()}</p>
                               <p className="text-white/60 text-xs">Annual Revenue</p>
                             </div>
                           </div>
 
-                          <div className="grid grid-cols-3 gap-3 mb-4">
-                            <div className="bg-white/5 rounded-lg p-3 text-center">
+                          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
+                            <div className="bg-white/5 rounded-lg p-2 sm:p-3 text-center">
                               <p className="text-white/60 text-xs mb-1">Value</p>
-                              <p className="text-white font-bold">${business.value.toLocaleString()}</p>
+                              <p className="text-white font-bold text-xs sm:text-sm">${business.value.toLocaleString()}</p>
                             </div>
-                            <div className="bg-white/5 rounded-lg p-3 text-center">
+                            <div className="bg-white/5 rounded-lg p-2 sm:p-3 text-center">
                               <p className="text-white/60 text-xs mb-1">Employees</p>
-                              <p className="text-white font-bold">{business.employees}</p>
+                              <p className="text-white font-bold text-xs sm:text-sm">{business.employees}</p>
                             </div>
-                            <div className="bg-white/5 rounded-lg p-3 text-center">
+                            <div className="bg-white/5 rounded-lg p-2 sm:p-3 text-center">
                               <p className="text-white/60 text-xs mb-1">Reputation</p>
-                              <p className="text-white font-bold">{business.reputation}%</p>
+                              <p className="text-white font-bold text-xs sm:text-sm">{business.reputation}%</p>
                             </div>
                           </div>
 
@@ -402,22 +435,28 @@ export default function BusinessMenu({ onClose }: BusinessMenuProps) {
                             />
                           </div>
 
-                          <div className="flex gap-2 flex-wrap">
+                          <div className="flex flex-col sm:flex-row gap-2 flex-wrap">
                             <button
                               onClick={() => toggleExpanded(business.id)}
-                              className="px-4 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 text-sm font-semibold transition-all"
+                              className="w-full sm:w-auto px-4 py-2 bg-white/10 text-white rounded-full hover:bg-white/20 text-xs sm:text-sm font-semibold transition-all"
                             >
                               {isExpanded ? 'Hide Details' : 'Show Details'}
                             </button>
                             <button
-                              onClick={() => handleUpgradeBusiness(business.id)}
-                              className="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full hover:bg-blue-500/30 text-sm font-semibold transition-all"
+                              onClick={() => {
+                                playButtonClick();
+                                handleUpgradeBusiness(business.id);
+                              }}
+                              className="w-full sm:w-auto px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full hover:bg-blue-500/30 text-xs sm:text-sm font-semibold transition-all"
                             >
                               ⬆️ Upgrade (${Math.floor(business.value * 0.5).toLocaleString()})
                             </button>
                             <button
-                              onClick={() => handleSellBusiness(business.id)}
-                              className="px-4 py-2 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500/30 text-sm font-semibold transition-all"
+                              onClick={() => {
+                                playButtonClick();
+                                handleSellBusiness(business.id);
+                              }}
+                              className="w-full sm:w-auto px-4 py-2 bg-red-500/20 text-red-400 rounded-full hover:bg-red-500/30 text-xs sm:text-sm font-semibold transition-all"
                             >
                               💰 Sell (${Math.floor(business.value * (business.reputation / 100) * 1.2).toLocaleString()})
                             </button>

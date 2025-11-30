@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Character, GameStats, DetailedRelationship } from '@/store/gameStore';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 
 interface CharacterCreationProps {
   onStart: (character: Character, stats: GameStats, initialRelationships?: DetailedRelationship[]) => void;
@@ -15,6 +16,7 @@ const locations = [
 ];
 
 export default function CharacterCreation({ onStart }: CharacterCreationProps) {
+  const { playButtonClick, playBirth, playTabSwitch } = useSoundEffects();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState<'Male' | 'Female' | 'Non-binary'>('Male');
@@ -22,9 +24,12 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
 
   const handleStart = () => {
     if (!firstName || !lastName) {
+      playButtonClick();
       alert('Please enter your name!');
       return;
     }
+
+    playBirth();
 
     const character: Character = {
       name: `${firstName} ${lastName}`,
@@ -140,7 +145,10 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
                     type="radio"
                     value="Male"
                     checked={gender === 'Male'}
-                    onChange={() => setGender('Male')}
+                    onChange={() => {
+                      playTabSwitch();
+                      setGender('Male');
+                    }}
                   />
                 </label>
                 <label className={`flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 transition-colors ${gender === 'Female' ? 'bg-[#11221a] shadow-[0_0_4px_rgba(0,0,0,0.1)] text-white' : 'text-[#92c9ad]'} text-sm font-medium leading-normal`}>
@@ -151,7 +159,10 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
                     type="radio"
                     value="Female"
                     checked={gender === 'Female'}
-                    onChange={() => setGender('Female')}
+                    onChange={() => {
+                      playTabSwitch();
+                      setGender('Female');
+                    }}
                   />
                 </label>
                 <label className={`flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 transition-colors ${gender === 'Non-binary' ? 'bg-[#11221a] shadow-[0_0_4px_rgba(0,0,0,0.1)] text-white' : 'text-[#92c9ad]'} text-sm font-medium leading-normal`}>
@@ -162,7 +173,10 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
                     type="radio"
                     value="Non-binary"
                     checked={gender === 'Non-binary'}
-                    onChange={() => setGender('Non-binary' as any)}
+                    onChange={() => {
+                      playTabSwitch();
+                      setGender('Non-binary' as any);
+                    }}
                   />
                 </label>
               </div>
@@ -180,7 +194,10 @@ export default function CharacterCreation({ onStart }: CharacterCreationProps) {
                       type="radio"
                       value={loc.id}
                       checked={location === loc.id}
-                      onChange={() => setLocation(loc.id)}
+                      onChange={() => {
+                        playTabSwitch();
+                        setLocation(loc.id);
+                      }}
                     />
                     <div
                       className={`overflow-hidden rounded-lg aspect-[4/3] ring-2 ${location === loc.id ? 'ring-primary' : 'ring-transparent'} bg-cover bg-center transition-all group-hover:opacity-90`}

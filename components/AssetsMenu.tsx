@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '@/store/gameStore';
 import { useState } from 'react';
 import { showStatChange } from './StatChangeNotification';
+import { useSoundEffects } from '@/hooks/useSoundEffects';
 
 interface AssetsMenuProps {
   onClose: () => void;
@@ -11,6 +12,7 @@ interface AssetsMenuProps {
 
 export default function AssetsMenu({ onClose }: AssetsMenuProps) {
   const { stats, assets, removeAsset, addMoney, addHistory } = useGameStore();
+  const { playButtonClick, playMenuClose, playTabSwitch, playSell, playMoneyGain } = useSoundEffects();
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'house' | 'car' | 'other'>('all');
 
   const houses = assets.filter(a => a.type === 'house');
@@ -34,11 +36,15 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
     const sellPrice = Math.floor(asset.value * (1 - depreciation) * conditionMultiplier);
 
     if (confirm(`Sell ${asset.name} for $${sellPrice.toLocaleString()}?\n\nOriginal Value: $${asset.value.toLocaleString()}\nCurrent Value: $${sellPrice.toLocaleString()}\nYears Owned: ${yearsOwned}`)) {
+      playSell();
+      playMoneyGain();
       addMoney(sellPrice);
       removeAsset(assetId);
       showStatChange('money', sellPrice);
       addHistory('activity', `Sold ${asset.name} for $${sellPrice.toLocaleString()}`);
       alert(`💰 Sold ${asset.name} for $${sellPrice.toLocaleString()}!`);
+    } else {
+      playButtonClick();
     }
   };
 
@@ -80,12 +86,12 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         <div className="relative z-10">
-          <div className="flex items-start justify-between mb-3">
-            <div className="flex items-center gap-3">
-              <span className="text-4xl">{icon}</span>
-              <div>
-                <h3 className="text-white font-bold text-lg">{asset.name}</h3>
-                <p className="text-[#92c9ad] text-sm capitalize">{asset.type}</p>
+          <div className="flex items-start justify-between mb-3 gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              <span className="text-3xl sm:text-4xl flex-shrink-0">{icon}</span>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-white font-bold text-base sm:text-lg truncate">{asset.name}</h3>
+                <p className="text-[#92c9ad] text-xs sm:text-sm capitalize">{asset.type}</p>
               </div>
             </div>
           </div>
@@ -134,10 +140,13 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
           )}
 
           <motion.button
-            onClick={() => handleSellAsset(asset.id)}
+            onClick={() => {
+              playButtonClick();
+              handleSellAsset(asset.id);
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full py-2 bg-gradient-to-r from-yellow-500 to-orange-400 text-white rounded-full font-bold hover:shadow-lg transition-all"
+            className="w-full py-2 sm:py-3 bg-gradient-to-r from-yellow-500 to-orange-400 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm sm:text-base"
           >
             💰 Sell for ${currentValue.toLocaleString()}
           </motion.button>
@@ -157,20 +166,23 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
+        onClick={() => {
+          playMenuClose();
+          onClose();
+        }}
       >
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-glow"
+          className="bg-[#2c3e50] border border-primary/30 rounded-xl shadow-2xl max-w-7xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col animate-glow"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 sm:px-6 py-4 bg-gradient-to-r from-[#34495e] to-[#2c3e50]">
             <div>
-              <h1 className="text-white text-2xl font-bold">🏠 My Assets</h1>
-              <div className="flex gap-4 mt-1 text-sm">
+              <h1 className="text-white text-xl sm:text-2xl font-bold">🏠 My Assets</h1>
+              <div className="flex flex-wrap gap-2 sm:gap-4 mt-1 text-xs sm:text-sm">
                 <span className="text-[#92c9ad]">
                   📦 {assets.length} {assets.length === 1 ? 'item' : 'items'}
                 </span>
@@ -180,18 +192,21 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
               </div>
             </div>
             <button
-              onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              onClick={() => {
+                playMenuClose();
+                onClose();
+              }}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors flex-shrink-0"
             >
               <span className="material-symbols-outlined text-white">close</span>
             </button>
           </div>
 
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
             {/* Categories Sidebar */}
-            <div className="w-64 border-r border-white/10 p-4 bg-[#34495e]/50">
-              <h2 className="text-white font-bold mb-4">Categories</h2>
-              <div className="space-y-2">
+            <div className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-white/10 p-4 bg-[#34495e]/50 overflow-x-auto lg:overflow-x-visible">
+              <h2 className="text-white font-bold mb-4 text-base sm:text-lg">Categories</h2>
+              <div className="flex lg:flex-col gap-2 lg:space-y-2 lg:space-y-0 overflow-x-auto lg:overflow-x-visible">
                 {[
                   { id: 'all', label: 'All Assets', icon: '📦', count: assets.length },
                   { id: 'house', label: 'Real Estate', icon: '🏠', count: houses.length },
@@ -200,10 +215,15 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
                 ].map((category) => (
                   <motion.button
                     key={category.id}
-                    onClick={() => setSelectedCategory(category.id as any)}
+                    onClick={() => {
+                      if (selectedCategory !== category.id) {
+                        playTabSwitch();
+                      }
+                      setSelectedCategory(category.id as any);
+                    }}
                     whileHover={{ scale: 1.02, x: 5 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 relative overflow-hidden ${
+                    className={`flex-shrink-0 lg:w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-all duration-300 relative overflow-hidden ${
                       selectedCategory === category.id
                         ? 'bg-gradient-to-r from-primary to-emerald-400 text-white shadow-lg'
                         : 'text-white/70 hover:bg-white/10 hover:text-white'
@@ -212,11 +232,11 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
                     {selectedCategory === category.id && (
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
                     )}
-                    <div className="flex items-center gap-3 relative z-10">
-                      <span className="text-xl">{category.icon}</span>
-                      <span className="text-sm font-medium">{category.label}</span>
+                    <div className="flex items-center gap-2 sm:gap-3 relative z-10">
+                      <span className="text-lg sm:text-xl">{category.icon}</span>
+                      <span className="text-xs sm:text-sm font-medium whitespace-nowrap">{category.label}</span>
                     </div>
-                    <span className={`text-xs font-bold px-2 py-1 rounded-full relative z-10 ${
+                    <span className={`text-xs font-bold px-2 py-1 rounded-full relative z-10 flex-shrink-0 ${
                       selectedCategory === category.id
                         ? 'bg-white/20'
                         : 'bg-primary/20 text-primary'
@@ -228,9 +248,9 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
               </div>
 
               {/* Summary Stats */}
-              <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
-                <h3 className="text-white font-bold text-sm mb-3">Portfolio Summary</h3>
-                <div className="space-y-2 text-sm">
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-white/5 rounded-lg border border-white/10">
+                <h3 className="text-white font-bold text-xs sm:text-sm mb-3">Portfolio Summary</h3>
+                <div className="space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
                     <span className="text-white/60">Real Estate:</span>
                     <span className="text-white font-semibold">{houses.length}</span>
@@ -248,7 +268,7 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
             </div>
 
             {/* Assets Grid */}
-            <div className="flex-1 p-6 overflow-y-auto">
+            <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
               {filteredAssets.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full">
                   <span className="text-6xl mb-4">📦</span>
@@ -262,13 +282,13 @@ export default function AssetsMenu({ onClose }: AssetsMenuProps) {
                 </div>
               ) : (
                 <>
-                  <h2 className="text-white text-xl font-bold mb-4">
+                  <h2 className="text-white text-lg sm:text-xl font-bold mb-4">
                     {selectedCategory === 'all' && 'All Assets'}
                     {selectedCategory === 'house' && '🏠 Real Estate'}
                     {selectedCategory === 'car' && '🚗 Vehicles'}
                     {selectedCategory === 'other' && '📦 Other Items'}
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredAssets.map(renderAssetCard)}
                   </div>
                 </>
