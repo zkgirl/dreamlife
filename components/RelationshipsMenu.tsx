@@ -14,7 +14,7 @@ const firstNames = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Ave
 const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Anderson', 'Wilson', 'Moore', 'Taylor', 'Thomas'];
 
 export default function RelationshipsMenu({ onClose }: RelationshipsMenuProps) {
-  const { stats, character, relationships, addRelationship, updateRelationship, removeRelationship, spendMoney, addMoney, updateStats, addHistory } = useGameStore();
+  const { stats, character, relationships, addRelationship, updateRelationship, removeRelationship, spendMoney, addMoney, updateStats, addHistory, unlockAchievement } = useGameStore();
   const { playButtonClick, playMenuClose, playTabSwitch, playNewRelationship, playBreakup, playGift, playArgument, playRelationshipIncrease, playRelationshipDecrease, playMoneyGain } = useSoundEffects();
   const [selectedTab, setSelectedTab] = useState<'all' | 'dating' | 'family' | 'friends'>('all');
   const [expandedRelId, setExpandedRelId] = useState<string | null>(null);
@@ -100,6 +100,66 @@ export default function RelationshipsMenu({ onClose }: RelationshipsMenuProps) {
     showStatChange('happiness', 30);
     updateStats({ happiness: 30 });
     addHistory('milestone', `Married ${rel.name}!`);
+    unlockAchievement('married');
+  };
+
+  const handleMakeLove = (relId: string) => {
+    const rel = relationships.find(r => r.id === relId);
+    if (!rel) return;
+
+    if (stats.age < 18) {
+      playButtonClick();
+      alert('You are too young!');
+      return;
+    }
+
+    // Relationship bonding
+    playRelationshipIncrease();
+    const increase = Math.floor(Math.random() * 10) + 10; // 10-20
+    updateRelationship(relId, { relationship: Math.min(100, rel.relationship + increase) });
+    showStatChange('happiness', 20);
+    updateStats({ happiness: 20 });
+    addHistory('activity', `Had an intimate moment with ${rel.name}`);
+
+    // Check for existing children count
+    const existingChildren = children.length;
+
+    // 30% chance of pregnancy (reduced if already have children)
+    const baseChance = 0.3;
+    const adjustedChance = Math.max(0.05, baseChance - (existingChildren * 0.05));
+    const hasChild = Math.random() < adjustedChance;
+
+    if (hasChild) {
+      // Determine baby's gender randomly
+      const isBoy = Math.random() > 0.5;
+      const babyFirstName = isBoy
+        ? ['Liam', 'Noah', 'Oliver', 'Elijah', 'James', 'William', 'Lucas', 'Benjamin', 'Henry', 'Alexander'][Math.floor(Math.random() * 10)]
+        : ['Emma', 'Olivia', 'Ava', 'Sophia', 'Isabella', 'Charlotte', 'Amelia', 'Mia', 'Harper', 'Evelyn'][Math.floor(Math.random() * 10)];
+
+      const babyName = `${babyFirstName} ${character?.name.split(' ')[1] || 'Smith'}`;
+
+      // Add child relationship
+      addRelationship({
+        id: Date.now().toString(),
+        name: babyName,
+        type: 'child',
+        relationship: 100, // Start with max bond
+        age: 0,
+        generosity: Math.floor(Math.random() * 100),
+        craziness: Math.floor(Math.random() * 100),
+        petulance: Math.floor(Math.random() * 100),
+        alive: true,
+      });
+
+      playNewRelationship();
+      showStatChange('happiness', 50);
+      updateStats({ happiness: 50 });
+      addHistory('milestone', `${babyName} was born!`);
+
+      setTimeout(() => {
+        alert(`🍼 Congratulations! ${rel.name} is pregnant!\n\nYou have a ${isBoy ? 'baby boy' : 'baby girl'}: ${babyName}! 👶`);
+      }, 500);
+    }
   };
 
   const handleBreakup = (relId: string) => {
@@ -423,6 +483,15 @@ export default function RelationshipsMenu({ onClose }: RelationshipsMenuProps) {
                     💍 Propose ($5,000)
                   </button>
                 )}
+                <button
+                  onClick={() => {
+                    playButtonClick();
+                    handleMakeLove(rel.id);
+                  }}
+                  className="w-full sm:w-auto px-3 py-1.5 bg-rose-500/20 text-rose-400 rounded-full hover:bg-rose-500/30 text-xs font-semibold transition-all"
+                >
+                  💕 Make Love
+                </button>
                 <button
                   onClick={() => {
                     playButtonClick();
