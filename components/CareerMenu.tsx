@@ -59,6 +59,24 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
     return null;
   };
 
+  const quitJob = () => {
+    if (!job) return;
+
+    const confirmed = window.confirm(
+      `Are you sure you want to quit your job as ${job.title}?\n\nYou'll lose your salary of $${job.salary.toLocaleString()}/year.`
+    );
+
+    if (confirmed) {
+      const jobTitle = job.title;
+      setJob(null);
+      showStatChange('happiness', -15);
+      updateStats({ happiness: -15 });
+      addHistory('event', `Quit job as ${jobTitle}`);
+      playMenuClose();
+      alert(`You've quit your job as ${jobTitle}. Time to find a new opportunity!`);
+    }
+  };
+
   const applyForJob = (career: CareerPath) => {
     if (!canApply(career)) {
       const requirement = getMissingRequirement(career);
@@ -189,9 +207,19 @@ export default function CareerMenu({ onClose }: CareerMenuProps) {
             <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
               {job && (
                 <div className="mb-6 p-3 sm:p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-                  <p className="text-yellow-400 text-center font-semibold text-sm sm:text-base">
-                    ⚠️ You already have a job as {job.title}. Quit your current job before applying for a new one.
-                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-yellow-400 text-center sm:text-left font-semibold text-sm sm:text-base">
+                      ⚠️ You already have a job as {job.title}.
+                    </p>
+                    <motion.button
+                      onClick={quitJob}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-full font-bold text-sm transition-all shadow-lg flex-shrink-0"
+                    >
+                      🚪 Quit Job
+                    </motion.button>
+                  </div>
                 </div>
               )}
 
